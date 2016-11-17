@@ -25,6 +25,8 @@
       $email = filter_data($_POST['email']);
       $password = filter_data($_POST['password']);
 
+// Gregor Test
+
       // Liefert alle Infos zu User mit diesen Logindaten
       $result = login($email,$password);
 
