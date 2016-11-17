@@ -23,7 +23,7 @@
 
   <!-- Bootstrap -->
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,33 +72,33 @@
         <!-- Publikationen -->
         <div class="row">
           <div class="col-xs-12">
-          				  
-          				  
+
+
           	<div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">Ausgabe
 					<button type="button" class="btn btn-default btn-sm float_right" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</button>			  
+					</button>
 				  </h4>
 				</div>
 				<div class="panel-body">
-					
-     	
-          	
+
+
+
           	 <div class="panel-group" id="accordion">
 			  <div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
 					Publikation 1</a>
-					<div class="btn-group float_right">	  
+					<div class="btn-group float_right">
 					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>				
+						</button>
 					</div>
 				  </h4>
 				</div>
@@ -107,30 +107,30 @@
 					  <table class="table-hover publi_table">
 					  	<tr>
 							<th>Vorname:</th>
-							<td>Peter</td>					  	
+							<td>Peter</td>
 						</tr>
 				  		<tr>
 							<th>Nachname:</th>
-							<td>Müller</td>					  	
-						</tr>			  	
-					  </table>	
-				
+							<td>Müller</td>
+						</tr>
+					  </table>
+
 				  </div><!--/table-body-->
 				</div>
 			  </div><!--/panel-->
-			  
+
 			  <div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
 					Publikation 2</a>
-					<div class="btn-group float_right">	  
+					<div class="btn-group float_right">
 					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>				
+						</button>
 					</div>
 				  </h4>
 				</div>
@@ -139,30 +139,30 @@
 					  <table class="table-hover publi_table">
 					  	<tr>
 							<th>Vorname:</th>
-							<td>Peter</td>					  	
+							<td>Peter</td>
 						</tr>
 				  		<tr>
 							<th>Nachname:</th>
-							<td>Müller</td>					  	
-						</tr>			  	
-					  </table>	
-				
+							<td>Müller</td>
+						</tr>
+					  </table>
+
 				  </div><!--/table-body-->
 				</div>
 			  </div><!--/panel-->
-			  
+
 			  <div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">
 					<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
 					Publikation 3</a>
-					<div class="btn-group float_right">	  
+					<div class="btn-group float_right">
 					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						</button>
 						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>				
+						</button>
 					</div>
 				  </h4>
 				</div>
@@ -171,23 +171,23 @@
 					  <table class="table-hover publi_table">
 					  	<tr>
 							<th>Vorname:</th>
-							<td>Peter</td>					  	
+							<td>Peter</td>
 						</tr>
 				  		<tr>
 							<th>Nachname:</th>
-							<td>Müller</td>					  	
-						</tr>			  	
-					  </table>	
-				
+							<td>Müller</td>
+						</tr>
+					  </table>
+
 				  </div><!--/table-body-->
 				</div>
-			  </div><!--/panel--> 
-          	
-	
-          
+			  </div><!--/panel-->
+
+
+
   			</div>
-		  </div>        				
-          												
+		  </div>
+
 
           </div>
         </div> <!-- /Publikationen -->
@@ -237,6 +237,6 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

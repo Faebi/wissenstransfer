@@ -62,7 +62,7 @@
     <title>Wissentransfer - Login</title>
 
     <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="css/login.css" rel="stylesheet">
@@ -127,7 +127,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../Webseite/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="../Webseite/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script>
       $(function() {
 
