@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* Body / HTML / Allgemeines
+-------------------------------------------------------------------- */
+th{
+	width: 20%;
+}
+
+td{
+	width: 80%;	
+}
+
+.publi_table{
+	width: 100%;	
+}
+
+.float_right {
+	float: right;	
+}
+
+
+/* bootstrap
+-------------------------------------------------------------------- */
+.panel-heading{
+	height: 5rem;
+}
+
+
+
