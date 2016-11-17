@@ -1,6 +1,6 @@
 <?php
   session_start();
-	if(isset($_SESSION['id'])) unset($_SESSION['id']);
+	if(isset($_SESSION['user_id'])) unset($_SESSION['user_id']);
 	session_destroy();
 
 	// externe Dateien Laden test
@@ -33,12 +33,12 @@
       if( $row_count == 1){
         session_start();
         $user = mysqli_fetch_assoc($result);
-        $_SESSION['userid'] = $user['user_id'];
-        header("Location:home.php");
+        $_SESSION['user_id'] = $user['user_id'];
+        header("Location:my_publications.php");
       }else{
         // Fehlermeldungen werden erst später angezeigt
         $error = true;
-        $error_msg .= "Leider konnte wir Ihre E-Mailadresse oder Ihr Passwort nicht finden.</br>";
+        $error_msg .= "E-Mailadresse oder Passwort ungültig. Bitte überprüfen Sie Ihre Angaben.</br>";
       }
     }else{
       $error = true;
@@ -46,35 +46,6 @@
     }
   }
 
-
-  if(isset($_POST['register-submit'])){
-    // Kontrolle mit isset, ob email und password ausgefüllt wurde
-    if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['confirm-password'])){
-
-      // Werte aus POST-Array auf SQL-Injections prüfen und in Variablen schreiben
-      $email = filter_data($_POST['email']);
-      $password = filter_data($_POST['password']);
-      $confirm_password = filter_data($_POST['confirm-password']);
-      if($password == $confirm_password){
-        // register liefert bei erfolgreichem Eintrag in die DB den Wert TRUE zurück, andernfalls FALSE
-        $result = register($email, $password);
-        if($result){
-          $success = true;
-          $success_msg = "Sie haben erfolgreich registriert.</br>
-          Bitte loggen Sie sich jetzt ein.</br>";
-        }else{
-          $error = true;
-          $error_msg .= "Es gibt ein Problem mit der Datenbankverbindung.</br>";
-        }
-      }else{
-        $error = true;
-        $error_msg .= "Die Passwörter stimmen nicht überein.</br>";
-      }
-    }else{
-      $error = true;
-      $error_msg .= "Bitte füllen Sie alle Felder aus.</br>";
-    }
-  }
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -113,7 +84,7 @@
   						<div class="row">
   							<div class="col-lg-12">
   								<!-- Login-Formular -->
-  								<form id="login-form" action="my_publications.php" method="post" role="form" style="display: block;">
+  								<form id="login-form" action="index.php" method="post" role="form" style="display: block;">
   									<div class="form-group">
   										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="E-Mail-Adresse" value="">
   									</div>
