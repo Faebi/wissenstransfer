@@ -82,7 +82,7 @@
 	}
 
 	function get_authors($publication_id){
-		$sql = "SELECT firstname, lastname FROM user WHERE user_id in (SELECT user FROM publishes WHERE publication = $publication_id);";
+		$sql = "SELECT user_id, firstname, lastname, user, publication, ranking FROM user, publishes WHERE user_id = user AND publication = $publication_id ORDER BY ranking ASC;";
 		return get_result($sql);
 	}
 
