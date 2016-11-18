@@ -9,7 +9,13 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-$publication_list = get_all_publications();
+	$publication_list = get_my_publications($user_id);
+	$type_list = get_types();
+
+
+	if (isset($_POST['add-submit'])) {
+		$type = filter_data($_POST['type']);
+	}
 
 ?>
 
@@ -76,8 +82,8 @@ $publication_list = get_all_publications();
           	<div class="panel panel-default">
 							<div class="panel-heading">
 				  			<h4 class="panel-title">Alle Publikationen
-									<button type="button" class="btn btn-default btn-sm float_right" aria-label="Left Align">
-					  				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
+									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 									</button>
 				  			</h4>
 							</div>
@@ -147,6 +153,43 @@ $publication_list = get_all_publications();
           	</div>
         	</div> <!-- /Publikationen -->
 				</div>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<form enctype="multipart/form-data" action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
+
+								<div class="modal-header">
+									<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
+								</div><!-- modal-header -->
+
+								<div class="modal-body">
+									<div class="form-group row">
+										<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
+											<div class="col-sm-5">
+												<select class="form-control form-control-sm float_right" id="Type" name="type">
+						      <?php while($type = mysqli_fetch_assoc($type_list)) { ?>
+               						<option value="<?php echo $type['type_id']; ?>"><?php echo $type['type']; ?></option>
+									<?php } ?>
+												</select>
+
+
+
+										</div>
+
+									</div>
+
+								</div><!-- /modal-body -->
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
+									<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
+								</div><!-- /modal-footer -->
+							</form>
+
+						</div>
+					</div>
+				</div><!-- /modal -->
       </div> <!-- /Hauptinhalt -->
     </div>
   </div>
