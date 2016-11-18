@@ -10,11 +10,9 @@
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-  // für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg, $success, $success_msg
+  // für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg
   $error = false;
   $error_msg = "";
-  $success = false;
-  $success_msg = "";
 
   // Kontrolle, ob die Seite direkt aufgerufen wurde oder vom Login-Formular
   if(isset($_POST['login-submit'])){
@@ -24,8 +22,6 @@
       // Werte aus POST-Array auf SQL-Injections prüfen und in Variablen schreiben
       $email = filter_data($_POST['email']);
       $password = filter_data($_POST['password']);
-
-// Gregor Test
 
       // Liefert alle Infos zu User mit diesen Logindaten
       $result = login($email,$password);
@@ -43,6 +39,7 @@
         $error_msg .= "E-Mailadresse oder Passwort ungültig. Bitte überprüfen Sie Ihre Angaben.</br>";
       }
     }else{
+      // Fehlermeldungen werden erst später angezeigt
       $error = true;
       $error_msg .= "Bitte füllen Sie beide Felder aus.</br>";
     }
@@ -61,11 +58,11 @@
 
     <title>Wissentransfer - Login</title>
 
-    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap CSS file-->
   <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="css/login.css" rel="stylesheet">
+    <!-- individuelles CCS file für den Login -->
+  <link rel="stylesheet" href="css/login.css">
   </head>
 
   <body>
@@ -81,10 +78,12 @@
   							</div>
   						</div>
   						<hr>
-  					</div>
+  					</div> <!-- /panel-heading -->
+
   					<div class="panel-body">
   						<div class="row">
   							<div class="col-lg-12">
+
   								<!-- Login-Formular -->
   								<form id="login-form" action="index.php" method="post" role="form" style="display: block;">
   									<div class="form-group">
@@ -98,43 +97,39 @@
   											<div class="col-sm-6 col-sm-offset-3">
   												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="einloggen">
   											</div>
-  									</div>
-  								</div>
-  							</form>
+  									  </div>
+  								  </div>
+  							</form> <!-- Login-Formular -->
+
   							</div>
   						</div>
-  					</div>
-  			  </div>
+  					</div> <!-- /panel-body -->
+
+  			  </div> <!-- /panel-login -->
   			</div>
-  		</div>
+  		</div> <!-- /row -->
 
-  <?php
-    // Gibt es einen Erfolg zu vermelden?
-    if($success == true){
-  ?>
-      <div class="alert alert-success" role="alert"><?php echo $success_msg; ?></div>
-  <?php
-    }   // schliessen von if($success == true)
-    // Gibt es einen Fehler?
-    if($error == true){
-  ?>
-      <div class="alert alert-danger" role="alert"><?php echo $error_msg; ?></div>
-  <?php
-    }   // schliessen von if($success == true)
-  ?>
-  	</div><!-- /container -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <?php
+        // Ausgabe von Fehlermeldungen
+        if($error == true){   //gibt es einen Fehler?
+      ?>
+          <div class="alert alert-danger" role="alert"><?php echo $error_msg; ?></div>
+      <?php
+        }
+      ?>
+
+    </div><!-- /container Hauptinhalt -->
+
+
+    <!-- jQuery (nötig für Bootstrap und JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Alle kompillierten Plugins (unten), oder andere benötigte Files -->
     <script src="../Webseite/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script>
       $(function() {
-
         $('#login-form-link').click(function(e) {
       		$("#login-form").delay(100).fadeIn(100);
-       		$("#register-form").fadeOut(100);
-      		$('#register-form-link').removeClass('active');
       		$(this).addClass('active');
       		e.preventDefault();
       	});
