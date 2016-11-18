@@ -149,23 +149,14 @@ session_start();
 										<th>URL:</th>
 										<td><?php echo $publication['url'];?></td>
 									</tr>
-								</talbe>
+								</table>
 						<?php } ?>
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
 
 				  </div><!--/table-body-->
 				</div>
 			  </div><!--/panel-->
 				<?php } ?>
+<<<<<<< HEAD
 
 			  <div class="panel panel-default">
 				<div class="panel-heading">
@@ -234,6 +225,9 @@ session_start();
 
 
 			</div><!-- accordion -->
+=======
+  			</div>
+>>>>>>> 3b5abc507712ce014dab925d845d6d2c76a93ecf
 		  </div>
 
 

@@ -66,8 +66,8 @@
 		return get_result($sql);
 	}
 
-	function get_all_publications($user_id){
-		$sql = "SELECT * FROM posts p, user u WHERE p.owner = $user_id AND u.`user_id` = $user_id ;";
+	function get_all_publications(){
+    $sql = "SELECT * FROM publications;";
 		return get_result($sql);
 	}
 
@@ -82,7 +82,7 @@
 	}
 
 	function get_authors($publication_id){
-		$sql = "SELECT firstname, lastname FROM user WHERE user_id in (SELECT user FROM publishes WHERE publication = $publication_id);";
+		$sql = "SELECT user_id, firstname, lastname, user, publication, ranking FROM user, publishes WHERE user_id = user AND publication = $publication_id ORDER BY ranking ASC;";
 		return get_result($sql);
 	}
 
