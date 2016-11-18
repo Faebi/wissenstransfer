@@ -9,7 +9,7 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-	$publication_list = get_my_publications($user_id);
+	$publication_list = get_all_publications();
 	$type_list = get_types();
 
 

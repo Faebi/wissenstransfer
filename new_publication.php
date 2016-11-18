@@ -75,11 +75,11 @@ $publication_list = get_all_publications();
           <div class="col-xs-12">
           	<div class="panel panel-default">
 							<div class="panel-heading">
-				  			<h4 class="panel-title">Buch erfassen</h4>
+				  			<h4 class="panel-title"><?php echo $_POST['type'] ?> erfassen</h4>
 							</div>
 							<div class="panel-body">
 								<form enctype="multipart/form-data" action="my_publications.php" method="post">
-									<?php switch (1){ 																													// 1 ist mit $_POST['type'] zu ersetzen!!!
+									<?php switch ($_POST['type']){ 																													// 1 ist mit $_POST['type'] zu ersetzen!!!
 										case 1: ?> <!-- Typ: Buch -->
 											<div class="form-group row col-sm-offset-2">
 												<label for="Titel" class="col-sm-1 form-control-label">Titel</label>
