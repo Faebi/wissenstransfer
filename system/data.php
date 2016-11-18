@@ -66,8 +66,8 @@
 		return get_result($sql);
 	}
 
-	function get_all_publications($user_id){
-		$sql = "SELECT * FROM posts p, user u WHERE p.owner = $user_id AND u.`user_id` = $user_id ;";
+	function get_all_publications(){
+    $sql = "SELECT * FROM publications;";
 		return get_result($sql);
 	}
 

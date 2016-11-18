@@ -141,90 +141,13 @@ session_start();
 										<th>URL:</th>
 										<td><?php echo $publication['url'];?></td>
 									</tr>
-								</talbe>
+								</table>
 						<?php } ?>
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
 
 				  </div><!--/table-body-->
 				</div>
 			  </div><!--/panel-->
 				<?php } ?>
-
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-					Publikation 2</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse2" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-					Publikation 3</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse3" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-
-
   			</div>
 		  </div>
 

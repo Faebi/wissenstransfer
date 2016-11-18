@@ -9,6 +9,8 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	$publication_list = get_all_publications();
+
 
 ?>
 
@@ -86,106 +88,67 @@ session_start();
 
 
 
-          	 <div class="panel-group" id="accordion">
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-					Publikation 1</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
+					<div class="panel-group" id="accordion">
+						<?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
+		 <div class="panel panel-default">
+		 <div class="panel-heading">
+			 <h4 class="panel-title">
+				 <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+					 <?php echo $publication['title'] ?>
+				 </a>
+			 <div class="btn-group float_right">
+					 <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+					 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+				 </button>
+				 <button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+					 <span class="glyphicon glyphicon-trash" ></span>
+				 </button>
+			 </div>
+			 </h4>
+		 </div>
+		 <div id="collapse1" class="panel-collapse collapse">
+			 <div class="panel-body">
+				 <?php switch ($publication['type']){
+					 case 4: ?>
+						 <table class="table-hover publi_table">
+							 <tr>
+								 <th>Titel:</th>
+								 <td><?php echo $publication['title']; ?></td>
+							 </tr>
+							 <tr>
+								 <th>Autor(en):</th>
+								 <td>
+									 <?php
+										 $authors = get_authors($publication['publication_id']);
+										 $author_result = "";
+										 while($author = mysqli_fetch_assoc($authors)){
+											 $author_result .= $author['firstname']." ".$author['lastname'].", ";
+										 }
+										 $author_result = substr_replace($author_result, ' ', -2, 1);
+										 echo $author_result;
+									 ?>
+								 </td>
+							 </tr>
+							 <tr>
+								 <th>Datum:</th>
+								 <td><?php echo $publication['date']; ?></td>
+							 </tr>
+							 <tr>
+								 <th>Publikationsort:</th>
+								 <td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
+							 </tr>
+							 <tr>
+								 <th>URL:</th>
+								 <td><?php echo $publication['url'];?></td>
+							 </tr>
+						 </table>
+				 <?php } ?>
 
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-					Publikation 2</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse2" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-					Publikation 3</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse3" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-
-
-  			</div>
+			 </div><!--/table-body-->
+		 </div>
+		 </div><!--/panel-->
+		 <?php } ?>
+		 </div>
 		  </div>
 
 
