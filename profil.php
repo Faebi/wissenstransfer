@@ -24,7 +24,7 @@ session_start();
 		$confirm_password = filter_data($_POST['confirm-password']);
 
 		if ($old_password == $user['password']) {
-			$result_password = update_password($user_id, $old_password, $new_password, $confirm_password);
+			$result_password = update_password($user_id, $new_password, $confirm_password);
 			if ($result_password != false) {
 				$success = true;
 				$success_msg = "Ihr neues Passwort wurde erfolgreich gespeichert.";

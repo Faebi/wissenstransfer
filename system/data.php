@@ -62,7 +62,7 @@
 	}
 
 	function delete_publication($post_id){
-    $sql = "DELETE FROM posts WHERE post_id = $post_id ;";
+    $sql = "DELETE FROM publications WHERE post_id = $post_id ;";
 		return get_result($sql);
 	}
 
@@ -106,14 +106,12 @@
 		return get_result($sql);
 	}
 
-	function update_password($user_id, $old_password, $new_password, $confirm_password){
+	function update_password($user_id, $new_password, $confirm_password){
   	$sql_ok = false;
-		// old password muss noch überprüft werden!!!
     if($new_password != "" && $new_password == $confirm_password) {
       $sql = "UPDATE user SET password = $new_password WHERE user_id = $user_id;";
   		$sql_ok = true;
     }
-
   	if($sql_ok){
   	  return get_result($sql);
   	}else{
