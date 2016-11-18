@@ -81,7 +81,7 @@ $type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
 							</div>
 							<div class="panel-body">
 								<form enctype="multipart/form-data" action="my_publications.php" method="post">
-									<?php switch ($type){ 																													// 1 ist mit $_POST['type'] zu ersetzen!!!
+									<?php switch ($type_id){ 																													// 1 ist mit $_POST['type'] zu ersetzen!!!
 										case 1: ?> <!-- Typ: Buch -->
 											<div class="form-group row col-sm-offset-2">
 												<label for="Titel" class="col-sm-1 form-control-label">Titel</label>
