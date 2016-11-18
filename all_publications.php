@@ -136,7 +136,7 @@ $publication_list = get_all_publications();
 								 							<td><?php echo $publication['url'];?></td>
 							 							</tr>
 						 							</table>
-				 								<?php } ?>
+				 								<?php break; } ?>
 
 			 								</div><!--/table-body-->
 		 								</div>
