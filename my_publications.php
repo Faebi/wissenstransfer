@@ -109,11 +109,37 @@ session_start();
 				<div id="collapse1" class="panel-collapse collapse">
 				  <div class="panel-body">
 						<?php switch ($publication['type']){
-							case 2: ?>
+							case 4: ?>
 								<table class="table-hover publi_table">
 									<tr>
 										<th>Titel:</th>
 										<td><?php echo $publication['title']; ?></td>
+									</tr>
+									<tr>
+										<th>Autor(en):</th>
+										<td>
+											<?php
+												$authors = get_authors($publication['publication_id']);
+												$author_result = "";
+												while($author = mysqli_fetch_assoc($authors)){
+													$author_result .= $author['firstname']." ".$author['lastname'].", ";
+												}
+												$author_result = substr_replace($author_result, ' ', -2, 1);
+												echo $author_result;
+											?>
+										</td>
+									</tr>
+									<tr>
+										<th>Datum:</th>
+										<td><?php echo $publication['date']; ?></td>
+									</tr>
+									<tr>
+										<th>Publikationsort:</th>
+										<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
+									</tr>
+									<tr>
+										<th>URL:</th>
+										<td><?php echo $publication['url'];?></td>
 									</tr>
 								</talbe>
 						<?php } ?>
