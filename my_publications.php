@@ -89,7 +89,7 @@ session_start();
 
 
           	 <div class="panel-group" id="accordion">
-							 <?php while($publication = mysqli_fetch_array($publication_list)){ ?>
+							 <?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
 			  <div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">
@@ -108,15 +108,15 @@ session_start();
 				</div>
 				<div id="collapse1" class="panel-collapse collapse">
 				  <div class="panel-body">
-						switch (<?php echo $publication['type']; ?>){
-							case 2:
-								<table class="table-hover publi-table">
+						<?php switch ($publication['type']){
+							case 2: ?>
+								<table class="table-hover publi_table">
 									<tr>
 										<th>Titel:</th>
 										<td><?php echo $publication['title']; ?></td>
 									</tr>
 								</talbe>
-						}
+						<?php } ?>
 					  <table class="table-hover publi_table">
 					  	<tr>
 							<th>Vorname:</th>
