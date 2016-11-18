@@ -86,6 +86,11 @@
 		return get_result($sql);
 	}
 
+	function get_types(){
+		$sql = "SELECT * FROM type;";
+		return get_result($sql);
+	}
+
 
 	/* *********************************************************
 	/* Profil

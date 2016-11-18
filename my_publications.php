@@ -10,6 +10,14 @@ session_start();
 	require_once("system/security.php");
 
 	$publication_list = get_my_publications($user_id);
+	$type_list = get_types();
+
+
+	if (isset($_POST['add-submit'])) {
+		$type = filter_data($_POST['type']);
+	}
+
+
 
 
 ?>
@@ -79,7 +87,7 @@ session_start();
           	<div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">Alle Publikationen
-					<button type="button" class="btn btn-default btn-sm float_right" aria-label="Left Align">
+					<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</button>
 				  </h4>
@@ -148,7 +156,78 @@ session_start();
 				</div>
 			  </div><!--/panel-->
 				<?php } ?>
+<<<<<<< HEAD
+
+			  <div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+					Publikation 2</a>
+					<div class="btn-group float_right">
+					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+						  <span class="glyphicon glyphicon-trash" ></span>
+						</button>
+					</div>
+				  </h4>
+				</div>
+				<div id="collapse2" class="panel-collapse collapse">
+				  <div class="panel-body">
+					  <table class="table-hover publi_table">
+					  	<tr>
+							<th>Vorname:</th>
+							<td>Peter</td>
+						</tr>
+				  		<tr>
+							<th>Nachname:</th>
+							<td>Müller</td>
+						</tr>
+					  </table>
+
+				  </div><!--/table-body-->
+				</div>
+			  </div><!--/panel-->
+
+			  <div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">
+					<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+					Publikation 3</a>
+					<div class="btn-group float_right">
+					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+						  <span class="glyphicon glyphicon-trash" ></span>
+						</button>
+					</div>
+				  </h4>
+				</div>
+				<div id="collapse3" class="panel-collapse collapse">
+				  <div class="panel-body">
+					  <table class="table-hover publi_table">
+					  	<tr>
+							<th>Vorname:</th>
+							<td>Peter</td>
+						</tr>
+				  		<tr>
+							<th>Nachname:</th>
+							<td>Müller</td>
+						</tr>
+					  </table>
+
+				  </div><!--/table-body-->
+				</div>
+			  </div><!--/panel-->
+
+
+
+			</div><!-- accordion -->
+=======
   			</div>
+>>>>>>> 3b5abc507712ce014dab925d845d6d2c76a93ecf
 		  </div>
 
 
@@ -195,7 +274,49 @@ session_start();
 
       </div> <!-- /Hauptinhalt -->
     </div>
-  </div>
+
+		<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<form enctype="multipart/form-data" action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
+
+								<div class="modal-header">
+									<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
+								</div><!-- modal-header -->
+
+								<div class="modal-body">
+									<div class="form-group row">
+										<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
+											<div class="col-sm-5">
+												<select class="form-control form-control-sm float_right" id="Type" name="type">
+						      <?php while($type = mysqli_fetch_assoc($type_list)) { ?>
+               						<option value="<?php echo $type['type_id']; ?>"><?php echo $type['type']; ?></option>
+									<?php } ?>
+												</select>
+
+
+
+										</div>
+
+									</div>
+
+								</div><!-- /modal-body -->
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
+									<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
+								</div><!-- /modal-footer -->
+							</form>
+
+						</div>
+					</div>
+				</div><!-- /modal -->
+
+  </div><!-- /container -->
+
+
+
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
