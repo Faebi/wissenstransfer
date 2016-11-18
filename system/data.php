@@ -30,7 +30,7 @@
 	function get_result($sql)
 	{
 		$db = get_db_connection();
-    echo $sql ."<br>";
+    // echo $sql ."<br>";
 		$result = mysqli_query($db, $sql);
 		mysqli_close($db);
 		return $result;
@@ -57,7 +57,7 @@
 	}
 
 	function get_my_publications($user_id){
-    $sql = "SELECT * FROM posts p, user u WHERE p.owner = $user_id AND u.`user_id` = $user_id ;";
+    $sql = "SELECT * FROM publications WHERE publication_id IN (SELECT publication FROM publishes p WHERE p.user = $user_id);";
 		return get_result($sql);
 	}
 
@@ -68,6 +68,21 @@
 
 	function get_all_publications($user_id){
 		$sql = "SELECT * FROM posts p, user u WHERE p.owner = $user_id AND u.`user_id` = $user_id ;";
+		return get_result($sql);
+	}
+
+	function get_media($media_id){
+		$sql = "SELECT media FROM media WHERE media_id = $media_id;";
+		return get_result($sql);
+	}
+
+	function get_location($location_id){
+		$sql = "SELECT location FROM location WHERE location_id = $location_id;";
+		return get_result($sql);
+	}
+
+	function get_authors($publication_id){
+		$sql = "SELECT firstname, lastname FROM user WHERE user_id in (SELECT user FROM publishes WHERE publication = $publication_id);";
 		return get_result($sql);
 	}
 
