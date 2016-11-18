@@ -142,7 +142,7 @@ session_start();
 										<td><?php echo $publication['url'];?></td>
 									</tr>
 								</table>
-						<?php } ?>
+						<?php break; } ?>
 
 				  </div><!--/table-body-->
 				</div>
