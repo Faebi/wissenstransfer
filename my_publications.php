@@ -78,7 +78,7 @@ session_start();
 
           	<div class="panel panel-default">
 				<div class="panel-heading">
-				  <h4 class="panel-title">Alle Publikationen
+				  <h4 class="panel-title">Meine Publikationen
 					<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
 					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 					</button>

@@ -57,7 +57,7 @@ $type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="my_publications.php">Meine Publikationen</a></li>
-          <li><a href="#">Alle Publikationen</a></li>
+          <li><a href="all_publications.php">Alle Publikationen</a></li>
           <li><a href="output.php">Ausgabe</a></li>
           <li><a href="profil.php">Profil</a></li>
         </ul>
