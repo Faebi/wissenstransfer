@@ -9,8 +9,38 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	$error = false;
+	$error_msg = "";
+	$success = false;
+	$success_msg = "";
+
+
 	$result = get_user($user_id);
 	$user = mysqli_fetch_assoc($result);
+
+	if(isset($_POST['update-submit'])){
+		$old_password = filter_data($_POST['old-password']);
+		$new_password = filter_data($_POST['new-password']);
+		$confirm_password = filter_data($_POST['confirm-password']);
+
+		if ($old_password == $user['password']) {
+			$result_password = update_password($user_id, $old_password, $new_password, $confirm_password);
+			if ($result_password != false) {
+				$success = true;
+				$success_msg = "Ihr neues Passwort wurde erfolgreich gespeichert.";
+			}else {
+				$error = true;
+				$error_msg = "Ihr Passwort konnte nicht angepasst werden, bitte überprüfen Sie Ihre Angaben.";
+			}
+		} else {
+			$error = true;
+			$error_msg = "Die Eingabe des alten Passwortes stimmt nicht mit Ihrem bestehenden Passwort überein.";
+		}
+	}
+
+
+
+
 ?>
 
 
@@ -110,13 +140,13 @@ session_start();
 		          <div class="form-group row">
 		            <label for="Passwort" class="col-sm-4 form-control-label">Altes Passwort</label>
 		            <div class="col-sm-8">
-		              <input type="password" class="form-control form-control-sm" id="Passwort" name="old_password">
+		              <input type="password" class="form-control form-control-sm" id="Passwort" name="old-password">
 		            </div>
 		          </div>
 		          <div class="form-group row">
-		            <label for="Passwort" class="col-sm-4 form-control-label">Neues Password</label>
+		            <label for="Passwort" class="col-sm-4 form-control-label">Neues Passwort</label>
 		            <div class="col-sm-8">
-		              <input type="password" class="form-control form-control-sm" id="Passwort" name="password">
+		              <input type="password" class="form-control form-control-sm" id="Passwort" name="new-password">
 		            </div>
 		          </div>
 		          <div class="form-group row">
@@ -136,6 +166,22 @@ session_start();
 		    </div>
 		  </div>
 		</div><!-- /modal -->
+
+		<?php
+			// Ausgabe von Fehlermeldungen
+			if($error == true){   //gibt es einen Fehler?
+		?>
+				<div class="alert alert-danger" role="alert"><?php echo $error_msg; ?></div>
+		<?php
+			}
+
+			// Ausgabe von Erfolgsmeldungen
+			if($success == true){   //gibt es einen Fehler?
+		?>
+				<div class="alert alert-success" role="alert"><?php echo $success_msg; ?></div>
+		<?php
+			}
+		?>
 
   </div><!-- /container -->
 
