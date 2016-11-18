@@ -9,6 +9,8 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	$publication_list = get_my_publications($user_id);
+
 
 ?>
 
@@ -87,11 +89,13 @@ session_start();
 
 
           	 <div class="panel-group" id="accordion">
+							 <?php while($publication = mysqli_fetch_array($publication_list)){ ?>
 			  <div class="panel panel-default">
 				<div class="panel-heading">
 				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-					Publikation 1</a>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+							<?php echo $publication['title'] ?>
+						</a>
 					<div class="btn-group float_right">
 					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -104,6 +108,15 @@ session_start();
 				</div>
 				<div id="collapse1" class="panel-collapse collapse">
 				  <div class="panel-body">
+						switch (<?php echo $publication['type']; ?>){
+							case 2:
+								<table class="table-hover publi-table">
+									<tr>
+										<th>Titel:</th>
+										<td><?php echo $publication['title']; ?></td>
+									</tr>
+								</talbe>
+						}
 					  <table class="table-hover publi_table">
 					  	<tr>
 							<th>Vorname:</th>
@@ -118,6 +131,7 @@ session_start();
 				  </div><!--/table-body-->
 				</div>
 			  </div><!--/panel-->
+				<?php } ?>
 
 			  <div class="panel panel-default">
 				<div class="panel-heading">

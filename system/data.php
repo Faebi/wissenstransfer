@@ -57,7 +57,7 @@
 	}
 
 	function get_my_publications($user_id){
-    $sql = "SELECT * FROM posts p, user u WHERE p.owner = $user_id AND u.`user_id` = $user_id ;";
+    $sql = "SELECT * FROM publications WHERE publication_id IN (SELECT publication FROM publishes p WHERE p.user = $user_id);";
 		return get_result($sql);
 	}
 
