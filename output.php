@@ -1,10 +1,10 @@
 <?php
-/*  session_start();
-	if(!isset($_SESSION['userid'])){
+session_start();
+	if(!isset($_SESSION['user_id'])){
 		header("Location:index.php");
 	}else{
-  	$user_id = $_SESSION['userid'];
-	}*/
+  	$user_id = $_SESSION['user_id'];
+	}
 
 	require_once("system/data.php");
 	require_once("system/security.php");
