@@ -91,6 +91,11 @@
 		return get_result($sql);
 	}
 
+	function get_type_name($type_id){
+		$sql = "SELECT type FROM type WHERE type_id = $type_id;";
+		return get_result($sql);
+	}
+
 
 	/* *********************************************************
 	/* Profil
