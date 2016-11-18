@@ -85,7 +85,7 @@
   							<div class="col-lg-12">
 
   								<!-- Login-Formular -->
-  								<form id="login-form" action="index.php" method="post" role="form" style="display: block;">
+  								<form id="login-form" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" role="form" style="display: block;">
   									<div class="form-group">
   										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="E-Mail-Adresse" value="">
   									</div>
