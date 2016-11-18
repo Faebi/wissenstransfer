@@ -75,129 +75,88 @@ session_start();
     </div><!-- /.container-fluid -->
   </nav><!-- /Navigation -->
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12"> <!-- Hauptinhalt -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12"> <!-- Hauptinhalt -->
 
-        <!-- Publikationen -->
-        <div class="row">
-          <div class="col-xs-12">
+				<!-- Publikationen -->
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">Meine Publikationen
+									<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
+									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+								</h4>
+							</div>
+							<div class="panel-body">
+								<div class="panel-group" id="accordion"> <!-- Liste mit allen Publikationen -->
+									<?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+													<?php echo $publication['title'] ?>
+												</a>
+												<div class="btn-group float_right">
+													<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+														<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													</button>
+													<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+														<span class="glyphicon glyphicon-trash" ></span>
+													</button>
+												</div>
+											</h4>
+										</div>
+										<div id="collapse1" class="panel-collapse collapse">
+											<div class="panel-body">
+												<?php switch ($publication['type']){
+																case 4: ?>
+													<table class="table-hover publi_table">
+														<tr>
+															<th>Titel:</th>
+															<td><?php echo $publication['title']; ?></td>
+														</tr>
+														<tr>
+															<th>Autor(en):</th>
+															<td>
+																<?php
+																	$authors = get_authors($publication['publication_id']);
+																	$author_result = "";
+																	while($author = mysqli_fetch_assoc($authors)){
+																		$author_result .= $author['firstname']." ".$author['lastname'].", ";
+																	}
+																	$author_result = substr_replace($author_result, ' ', -2, 1);
+																	echo $author_result;
+																?>
+															</td>
+														</tr>
+														<tr>
+															<th>Datum:</th>
+															<td><?php echo $publication['date']; ?></td>
+														</tr>
+														<tr>
+															<th>Publikationsort:</th>
+															<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
+														</tr>
+														<tr>
+															<th>URL:</th>
+															<td><?php echo $publication['url'];?></td>
+														</tr>
+													</table>
+												<?php break; } ?>
 
-
-          	<div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">Alle Publikationen
-					<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</button>
-				  </h4>
+											</div><!--/table-body-->
+										</div>
+									</div><!--/panel-->
+									<?php } ?>
+								</div> <!-- / Liste mit allen Publikationen -->
+							</div>
+						</div>
+					</div> <!-- /Publikationen -->
 				</div>
-				<div class="panel-body">
-
-
-
-          	 <div class="panel-group" id="accordion">
-							 <?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-							<?php echo $publication['title'] ?>
-						</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-				  <div class="panel-body">
-						<?php switch ($publication['type']){
-							case 4: ?>
-								<table class="table-hover publi_table">
-									<tr>
-										<th>Titel:</th>
-										<td><?php echo $publication['title']; ?></td>
-									</tr>
-									<tr>
-										<th>Autor(en):</th>
-										<td>
-											<?php
-												$authors = get_authors($publication['publication_id']);
-												$author_result = "";
-												while($author = mysqli_fetch_assoc($authors)){
-													$author_result .= $author['firstname']." ".$author['lastname'].", ";
-												}
-												$author_result = substr_replace($author_result, ' ', -2, 1);
-												echo $author_result;
-											?>
-										</td>
-									</tr>
-									<tr>
-										<th>Datum:</th>
-										<td><?php echo $publication['date']; ?></td>
-									</tr>
-									<tr>
-										<th>Publikationsort:</th>
-										<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
-									</tr>
-									<tr>
-										<th>URL:</th>
-										<td><?php echo $publication['url'];?></td>
-									</tr>
-								</table>
-						<?php break; } ?>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-				<?php } ?>
-
-
-<?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
-        <!-- Beitrag -->
-          <div class="row">
-            <div class="col-xs-2">
-              <div class="thumbnail p42thumbnail">
-                <img src="user_img/<?php echo $post['img_src']; ?>" alt="profilbildBock" class="img-responsive">
-              </div><!-- /thumbnail p42thumbnail -->
-            </div><!-- /col-sm-2 -->
-
-            <form enctype="multipart/form-data" class="form-inline" method="post" action="<?PHP echo $_SERVER['PHP_SELF'] ?>">
-              <div class="col-xs-10">
-                <div class="panel panel-default p42panel">
-                  <div class="panel-heading">
-<?php if($post['owner'] == $user_id){  ?>
-                    <button type="submit" class="close" name="post_delete" value="<?php echo $post['post_id']; ?>">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-<?php } ?>
-                    <h3 class="panel-title"><?php echo $post['firstname'] . " " . $post['lastname']; ?></h3>
-                  </div>
-                  <div class="panel-body">
-                    <p><?php echo $post['text']; ?></p>
-
-<?php if($post['post_img'] != NULL){  ?>
-                    <img src="post_img/<?php echo $post['post_img']; ?>" alt="postimage" class="img-responsive">
-<?php } ?>
-                  </div>
-                  <div class="panel-footer text-right">
-                    <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
-                  </div>
-                </div>
-              </div><!-- /col-sm-10 -->
-            </form>
-          </div> <!-- /Beitrag -->
-<?php   } ?>
-
-      </div> <!-- /Hauptinhalt -->
-    </div>
-
-		<!-- Modal -->
+				<!-- Modal -->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
@@ -234,11 +193,9 @@ session_start();
 						</div>
 					</div>
 				</div><!-- /modal -->
-
-  </div><!-- /container -->
-
-
-
+			</div> <!-- /Hauptinhalt -->
+		</div>
+	</div> <!-- /container -->
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
