@@ -11,16 +11,7 @@ session_start();
 
 	$publication_list = get_my_publications($user_id);
 	$type_list = get_types();
-
-
-	if (isset($_POST['add-submit'])) {
-		$type = filter_data($_POST['type']);
-		header("Location:new_publication.php");
-	}
-
-
-
-
+	
 ?>
 
 <!DOCTYPE html>
@@ -202,7 +193,7 @@ session_start();
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
-							<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+							<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
 								<div class="modal-header">
 									<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>

@@ -157,7 +157,7 @@ session_start();
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
-							<form enctype="multipart/form-data" action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
+							<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
 								<div class="modal-header">
 									<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
