@@ -12,11 +12,6 @@ session_start();
 	$publication_list = get_all_publications();
 	$type_list = get_types();
 
-
-	if (isset($_POST['add-submit'])) {
-		$type = filter_data($_POST['type']);
-	}
-
 ?>
 
 <!DOCTYPE html>
@@ -90,11 +85,15 @@ session_start();
 							</div>
 							<div class="panel-body">
 								<div class="panel-group" id="accordion"> <!-- Liste mit allen Publikationen -->
-									<?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
+									<?php while($publication = mysqli_fetch_assoc($publication_list)){
+										$type_label = get_type_label($publication['type']);
+										$type_column = get_type_column($publication['type']);
+										?>
+
 		 							<div class="panel panel-default">
 		 								<div class="panel-heading">
 			 								<h4 class="panel-title">
-				 								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+				 								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id'];?>">
 					 								<?php echo $publication['title'] ?>
 				 								</a>
 			 									<div class="btn-group float_right">
@@ -107,46 +106,61 @@ session_start();
 			 									</div>
 			 								</h4>
 		 								</div>
-		 								<div id="collapse1" class="panel-collapse collapse">
-			 								<div class="panel-body">
-				 								<?php switch ($publication['type']){
-					 											case 4: ?>
-						 							<table class="table-hover publi_table">
-							 							<tr>
-								 							<th>Titel:</th>
-								 							<td><?php echo $publication['title']; ?></td>
-							 							</tr>
-							 							<tr>
-								 							<th>Autor(en):</th>
-								 							<td>
-															 	<?php
-																 	$authors = get_authors($publication['publication_id']);
-																 	$author_result = "";
-																 	while($author = mysqli_fetch_assoc($authors)){
-																	 	$author_result .= $author['firstname']." ".$author['lastname'].", ";
-																 	}
-																 	$author_result = substr_replace($author_result, ' ', -2, 1);
-																 	echo $author_result;
-															 	?>
-								 							</td>
-							 							</tr>
-							 							<tr>
-								 							<th>Datum:</th>
-								 							<td><?php echo $publication['date']; ?></td>
-							 							</tr>
-							 							<tr>
-								 							<th>Publikationsort:</th>
-								 							<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
-							 							</tr>
-							 							<tr>
-								 							<th>URL:</th>
-								 							<td><?php echo $publication['url'];?></td>
-							 							</tr>
-						 							</table>
-				 								<?php break; } ?>
 
-			 								</div><!--/table-body-->
-		 								</div>
+										<div id="collapse<?php echo $publication['publication_id'];?>" class="panel-collapse collapse">
+				  						<div class="panel-body">
+												<table class="table-hover publi_table">
+													<?php	for ($i = 0; $i < 2; $i++) {?>
+													<tr>
+														<th><?php echo $type_label[$i]; ?></th>
+														<td><?php echo $publication[$type_column[$i]]; ?></td>
+													</tr>
+													<?php } ?>
+													<tr>
+														<th>Autor(en):</th>
+														<td>
+															<?php
+																$authors = get_authors($publication['publication_id']);
+																$author_result = "";
+																while($author = mysqli_fetch_assoc($authors)){
+																	$author_result .= $author['firstname']." ".$author['lastname'].", ";
+																}
+																$author_result = substr_replace($author_result, ' ', -2, 1);
+																echo $author_result;
+															?>
+														</td>
+													</tr>
+
+													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
+													<tr>
+														<th><?php echo $type_label[$i]; ?></th>
+														<td><?php switch ($type_column[$i]) {
+															case 'media':
+																	if (get_media($publication[$type_column[$i]])) {
+																		echo mysqli_fetch_assoc(get_media($publication[$type_column[$i]]))['media'];
+																	} else {
+																		echo "";
+																	}
+
+																break;
+															case 'location':
+															if (get_location($publication[$type_column[$i]])) {
+																echo mysqli_fetch_assoc(get_location($publication[$type_column[$i]]))['location'];
+															} else {
+																echo "";
+															}
+																break;
+															default:
+																echo $publication[$type_column[$i]];
+																break;
+															}?></td>
+													</tr>
+													<?php } ?>
+
+
+												</table>
+				  						</div><!--/table-body-->
+										</div>
 		 							</div><!--/panel-->
 		 							<?php } ?>
 		 						</div> <!-- / Liste mit allen Publikationen -->

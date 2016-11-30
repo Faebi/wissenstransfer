@@ -9,10 +9,6 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-	if(isset($_POST['delete-submit'])){
-		delete_publication($_POST['delete-submit']);
-	}
-
 	$publication_list = get_my_publications($user_id);
 	$type_list = get_types();
 
@@ -97,19 +93,21 @@ session_start();
 			  					<div class="panel panel-default">
 										<div class="panel-heading">
 				  						<h4 class="panel-title">
-												<a class="publication_title" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>"><?php echo $publication['title'] ?></a>
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id'];?>">
+													<?php echo $publication['title'] ?>
+												</a>
 												<div class="btn-group float_right">
 					  							<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													</button>
-													<button type="button" class="btn btn-danger btn-sm pub-delete" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
+													<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-trash" ></span>
 													</button>
 												</div>
 				  						</h4>
 										</div>
 
-										<div id="collapse<?php echo $publication['publication_id']?>" class="panel-collapse collapse">
+										<div id="collapse<?php echo $publication['publication_id'];?>" class="panel-collapse collapse">
 				  						<div class="panel-body">
 												<table class="table-hover publi_table">
 													<?php	for ($i = 0; $i < 2; $i++) {?>
@@ -136,7 +134,26 @@ session_start();
 													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
 													<tr>
 														<th><?php echo $type_label[$i]; ?></th>
-														<td><?php echo $publication[$type_column[$i]]; ?></td>
+														<td><?php switch ($type_column[$i]) {
+															case 'media':
+																	if (get_media($publication[$type_column[$i]])) {
+																		echo mysqli_fetch_assoc(get_media($publication[$type_column[$i]]))['media'];
+																	} else {
+																		echo "";
+																	}
+
+																break;
+															case 'location':
+															if (get_location($publication[$type_column[$i]])) {
+																echo mysqli_fetch_assoc(get_location($publication[$type_column[$i]]))['location'];
+															} else {
+																echo "";
+															}
+																break;
+															default:
+																echo $publication[$type_column[$i]];
+																break;
+															}?></td>
 													</tr>
 													<?php } ?>
 
@@ -192,23 +209,21 @@ session_start();
 	<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete-label">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+				<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Publikation löschen</h4>
+						<h4 class="modal-title" id="myModalLabel">Test</h4>
 					</div><!-- modal-header -->
 
 					<div class="modal-body">
 						<p>
-							Sind Sie sicher, dass Sie die Publikation "<span class="modal-pubtitle"></span>" löschen möchten?
-
-								<!-- <span class="modal-pubid"></span> -->
+							Sind Sie sicher, dass Sie die Publikation "<?php  ?>" löschen möchten?
 						</p>
 					</div><!-- /modal-body -->
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
-						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit" value="">Löschen</button>
+						<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
 					</div><!-- /modal-footer -->
 
 				</form>
@@ -221,14 +236,5 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-		$('.pub-delete').click(function() {
-			var pubId = $(this).attr('value');
-			$('.delete-submit').val(pubId);
-
-			var pubTitle = $(this).closest('.panel-heading').find('.publication_title').text();
-			$('.modal-pubtitle').text(pubTitle);
-		});
-	</script>
 </body>
 </html>
