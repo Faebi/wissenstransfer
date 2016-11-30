@@ -9,7 +9,6 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-$publication_list = get_all_publications();
 $type_id = filter_data($_POST['type']);
 $type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
 
