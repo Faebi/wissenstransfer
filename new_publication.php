@@ -9,11 +9,11 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-$type_id = filter_data($_POST['type']);
-$type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
+	$type_id = filter_data($_POST['type']);
+	$type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
 
-$type_label = get_type_label($type_id);
-$type_column = get_type_column($type_id);
+	$type_label = get_type_label($type_id);
+	$type_column = get_type_column($type_id);
 ?>
 
 <!DOCTYPE html>

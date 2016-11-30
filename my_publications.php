@@ -93,7 +93,7 @@ session_start();
 			  					<div class="panel panel-default">
 										<div class="panel-heading">
 				  						<h4 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id'];?>">
 													<?php echo $publication['title'] ?>
 												</a>
 												<div class="btn-group float_right">
@@ -107,7 +107,7 @@ session_start();
 				  						</h4>
 										</div>
 
-										<div id="collapse<?php echo $publication['publication_id']?>" class="panel-collapse collapse">
+										<div id="collapse<?php echo $publication['publication_id'];?>" class="panel-collapse collapse">
 				  						<div class="panel-body">
 												<table class="table-hover publi_table">
 													<?php	for ($i = 0; $i < 2; $i++) {?>
@@ -130,11 +130,30 @@ session_start();
 															?>
 														</td>
 													</tr>
-													
+
 													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
 													<tr>
 														<th><?php echo $type_label[$i]; ?></th>
-														<td><?php echo $publication[$type_column[$i]]; ?></td>
+														<td><?php switch ($type_column[$i]) {
+															case 'media':
+																	if (get_media($publication[$type_column[$i]])) {
+																		echo mysqli_fetch_assoc(get_media($publication[$type_column[$i]]))['media'];
+																	} else {													
+																		echo "";
+																	}
+
+																break;
+															case 'location':
+															if (get_location($publication[$type_column[$i]])) {
+																echo mysqli_fetch_assoc(get_location($publication[$type_column[$i]]))['location'];
+															} else {
+																echo "";
+															}
+																break;
+															default:
+																echo $publication[$type_column[$i]];
+																break;
+															}?></td>
 													</tr>
 													<?php } ?>
 
