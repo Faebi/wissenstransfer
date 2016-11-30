@@ -123,4 +123,154 @@
   		return false;
   	}
   }
+
+
+	/* *********************************************************
+	/* new_publication
+	/* ****************************************************** */
+
+	function get_type_label($type_id){
+		$type_label = array();
+		switch ($type_id) {
+			case '1':
+				$type_label[0] = "Titel";
+				$type_label[1] = "Untertitel";
+				$type_label[2] = "Datum";
+				$type_label[3] = "Verlag";
+				$type_label[4] = "URL";
+				$type_label[5] = "Ort";
+				return $type_label;
+				break;
+
+			case '2':
+				$type_label[0] = "Titel";
+				$type_label[1] = "Untertitel";
+				$type_label[2] = "Datum";
+				$type_label[3] = "Zeitung";
+				$type_label[4] = "URL";
+				$type_label[5] = "Ort";
+				$type_label[6] = "Ausgabe";
+				$type_label[7] = "Seitenzahl";
+				return $type_label;
+				break;
+
+			case '3':
+				$type_label[0] = "Titel";
+				$type_label[1] = "Untertitel";
+				$type_label[2] = "Datum";
+				$type_label[3] = "Departement";
+				$type_label[4] = "URL";
+				$type_label[5] = "Ort";
+				$type_label[6] = "Ausgabe";
+				$type_label[7] = "Seitenzahl";
+				return $type_label;
+				break;
+
+				case '4':
+				$type_label[0] = "Titel";
+					$type_label[1] = "Untertitel";
+					$type_label[2] = "Datum";
+					$type_label[3] = "Blog";
+					$type_label[4] = "URL";
+					$type_label[5] = "Ort";
+					return $type_label;
+					break;
+
+				case '5':
+					$type_label[0] = "Titel";
+					$type_label[1] = "Untertitel";
+					$type_label[2] = "Datum";
+					$type_label[3] = "Veranstaltung";
+					$type_label[4] = "URL";
+					$type_label[5] = "Ort";
+					return $type_label;
+					break;
+
+				case '6':
+					$type_label[0] = "Titel";
+					$type_label[1] = "Untertitel";
+					$type_label[2] = "Datum";
+					$type_label[3] = "Medium";
+					$type_label[4] = "URL";
+					$type_label[5] = "Ort";
+					$type_label[6] = "Ausgabe";
+					$type_label[7] = "Seitenzahl";
+					return $type_label;
+					break;
+			default:
+				break;
+		}
+	}
+
+	function get_type_column($type_id){
+		$type_column = array();
+		switch ($type_id) {
+			case '1':
+				$type_column[0] = "title";
+				$type_column[1] = "subtitle";
+				$type_column[2] = "date";
+				$type_column[3] = "media";
+				$type_column[4] = "url";
+				$type_column[5] = "location";
+				return $type_column;
+				break;
+
+			case '2':
+				$type_column[0] = "title";
+				$type_column[1] = "subtitle";
+				$type_column[2] = "date";
+				$type_column[3] = "media";
+				$type_column[4] = "url";
+				$type_column[5] = "location";
+				$type_column[6] = "series";
+				$type_column[7] = "page_nr";
+				break;
+
+			case '3':
+				$type_column[0] = "title";
+				$type_column[1] = "subtitle";
+				$type_column[2] = "date";
+				$type_column[3] = "media";
+				$type_column[4] = "url";
+				$type_column[5] = "location";
+				$type_column[6] = "series";
+				$type_column[7] = "page_nr";
+				break;
+
+			case '4':
+				$type_column[0] = "title";
+				$type_column[1] = "subtitle";
+				$type_column[2] = "date";
+				$type_column[3] = "media";
+				$type_column[4] = "url";
+				$type_column[5] = "location";
+				break;
+
+			case '5':
+				$type_column[0] = "title";
+				$type_column[1] = "subtitle";
+				$type_column[2] = "date";
+				$type_column[3] = "media";
+				$type_column[4] = "url";
+				$type_column[5] = "location";
+				break;
+
+			case '6':
+				$type_column[0] = "title";
+				$type_column[1] = "subtitle";
+				$type_column[2] = "date";
+				$type_column[3] = "media";
+				$type_column[4] = "url";
+				$type_column[5] = "location";
+				$type_column[6] = "series";
+				$type_column[7] = "page_nr";
+				break;
+
+			default:
+				break;
+		}
+	}
+
+
+
 ?>

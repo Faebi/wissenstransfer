@@ -12,6 +12,8 @@ session_start();
 $type_id = filter_data($_POST['type']);
 $type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
 
+$type_label = get_type_label($type_id);
+$type_column = get_type_column($type_id);
 ?>
 
 <!DOCTYPE html>
@@ -80,83 +82,15 @@ $type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
 							</div>
 							<div class="panel-body">
 								<form enctype="multipart/form-data" action="my_publications.php" method="post">
-									<?php switch ($type_id){ 																													// 1 ist mit $_POST['type'] zu ersetzen!!!
-										case 1: ?> <!-- Typ: Buch -->
-											<div class="form-group row col-sm-offset-2">
-												<label for="Titel" class="col-sm-1 form-control-label">Titel</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Titel" name="title">
-												</div>
+									<?php for ($i = 0; $i < count($type_label); $i++) {?>
+										<div class="form-group row col-sm-offset-2">
+											<label for="Titel" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
+											<div class="col-sm-7">
+												<input type="text" class="form-control form-control-sm" id="Titel" name="title">
 											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Untertitel" class="col-sm-1 form-control-label">Untertitel</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Untertitel" name="subtitle">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Datum" class="col-sm-1 form-control-label">Datum</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Datum" name="date">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Verlag" class="col-sm-1 form-control-label">Verlag</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Verlag" name="media">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="URL" class="col-sm-1 form-control-label">URL</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="URL" name="url">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Ort" class="col-sm-1 form-control-label">Ort</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Ort" name="location">
-												</div>
-											</div>
-									<?php break;
-									 	case 2:?>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Titel" class="col-sm-1 form-control-label">Titel</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Titel" name="title">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Untertitel" class="col-sm-1 form-control-label">Untertitel</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Untertitel" name="subtitle">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Datum" class="col-sm-1 form-control-label">Datum</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Datum" name="date">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Verlag" class="col-sm-1 form-control-label">Verlag</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Verlag" name="media">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="URL" class="col-sm-1 form-control-label">URL</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="URL" name="url">
-												</div>
-											</div>
-											<div class="form-group row col-sm-offset-2">
-												<label for="Ort" class="col-sm-1 form-control-label">Ort</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control form-control-sm" id="Ort" name="location">
-												</div>
-											</div>
-									<?php } ?>
+										</div>
+								<?php 	} ?>
+
 									<button type="submit" class="btn float_right" name="new_submit">Speichern</button>
 								</form>
 		  				</div>
