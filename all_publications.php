@@ -72,6 +72,7 @@ session_start();
     </div><!-- /.container-fluid -->
   </nav><!-- /Navigation -->
 
+	<!-- Container -->
   <div class="container">
     <div class="row">
       <div class="col-md-12"> <!-- Hauptinhalt -->
@@ -151,48 +152,46 @@ session_start();
 		 						</div> <!-- / Liste mit allen Publikationen -->
 		  				</div>
           	</div>
-        	</div> <!-- /Publikationen -->
-				</div>
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<form enctype="multipart/form-data" action="new_publication.php" method="post">
+        	</div>
+				</div> <!-- /Publikationen -->
+			</div>
+		</div>
+	</div> <!-- /Container -->
 
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
-								</div><!-- modal-header -->
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
-								<div class="modal-body">
-									<div class="form-group row">
-										<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
-											<div class="col-sm-5">
-												<select class="form-control form-control-sm float_right" id="Type" name="type">
-						      <?php while($type = mysqli_fetch_assoc($type_list)) { ?>
-               						<option value="<?php echo $type['type_id']; ?>"><?php echo $type['type']; ?></option>
-									<?php } ?>
-												</select>
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
+					</div><!-- modal-header -->
 
-
-
-										</div>
-
-									</div>
-
-								</div><!-- /modal-body -->
-
-								<div class="modal-footer">
-									<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
-									<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
-								</div><!-- /modal-footer -->
-							</form>
-
+					<div class="modal-body">
+						<div class="form-group row">
+							<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
+							<div class="col-sm-5">
+								<select class="form-control form-control-sm float_right" id="Type" name="type">
+						    <?php while($type = mysqli_fetch_assoc($type_list)) { ?>
+               		<option value="<?php echo $type['type_id']; ?>"><?php echo $type['type']; ?></option>
+								<?php } ?>
+								</select>
+							</div>
 						</div>
-					</div>
-				</div><!-- /modal -->
-      </div> <!-- /Hauptinhalt -->
-    </div>
-  </div>
+					</div><!-- /modal-body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
+						<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
+					</div><!-- /modal-footer -->
+
+				</form>
+			</div>
+		</div>
+	</div><!-- /modal -->
+
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
