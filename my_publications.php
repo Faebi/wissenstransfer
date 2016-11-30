@@ -12,7 +12,9 @@ session_start();
 	$publication_list = get_my_publications($user_id);
 	$type_list = get_types();
 
-	$delete_publication_id = NULL;
+	if(isset($_POST['delete-submit'])){
+		delete_publication($_POST['delete-submit']);
+	}
 
 ?>
 
@@ -95,9 +97,7 @@ session_start();
 			  					<div class="panel panel-default">
 										<div class="panel-heading">
 				  						<h4 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>">
-													<?php echo $publication['title'] ?>
-												</a>
+												<a class="publication_title" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>"><?php echo $publication['title'] ?></a>
 												<div class="btn-group float_right">
 					  							<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
@@ -132,7 +132,7 @@ session_start();
 															?>
 														</td>
 													</tr>
-													
+
 													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
 													<tr>
 														<th><?php echo $type_label[$i]; ?></th>
@@ -200,7 +200,7 @@ session_start();
 
 					<div class="modal-body">
 						<p>
-							Sind Sie sicher, dass Sie die Publikation "<span></span>" löschen möchten?
+							Sind Sie sicher, dass Sie die Publikation "<span class="modal-pubtitle"></span>" löschen möchten?
 
 								<!-- <span class="modal-pubid"></span> -->
 						</p>
@@ -208,7 +208,7 @@ session_start();
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
-						<button type="submit" class="btn btn-success btn-sm" name="delete-submit" value="<span id="modal-pubid"></span>">Löschen</button>
+						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit[]" value="">Löschen</button>
 					</div><!-- /modal-footer -->
 
 				</form>
@@ -224,7 +224,10 @@ session_start();
 	<script type="text/javascript">
 		$('.pub-delete').click(function() {
 			var pubId = $(this).attr('value');
-			$('#modal-pubid').text(pubId);
+			$('.delete-submit').val(pubId);
+
+			var pubTitle = $(this).closest('.panel-heading').find('.publication_title').text();
+			$('.modal-pubtitle').text(pubTitle);
 		});
 	</script>
 </body>
