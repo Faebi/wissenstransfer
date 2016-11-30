@@ -51,11 +51,6 @@
 	/* my_publications / all_publications
 	/* ****************************************************** */
 
-	function add_publication($posttext, $owner, $image){
-    $sql = "INSERT INTO posts (text, owner, post_img) VALUES ('$posttext', '$owner', '$image');";
-		return get_result($sql);
-	}
-
 	function get_my_publications($user_id){
     $sql = "SELECT * FROM publications WHERE publication_id IN (SELECT publication FROM publishes p WHERE p.user = $user_id);";
 		return get_result($sql);

@@ -13,8 +13,29 @@ session_start();
 		delete_publication($_POST['delete-submit']);
 	}
 
-	$publication_list = get_my_publications($user_id);
-	$type_list = get_types();
+	$type_label = get_type_label($type_id);
+	$type_column = get_type_column($type_id);
+
+	if(isset($_POST['new-submit'])){
+			$new_publication = array();
+		for ($i=0; $i < count($type_column) ; $i++) {
+			$new_publication[$i] = filter_data($_POST[$type_column[$i]]);
+		}
+
+		$result_publication = save_publication($user_id, $new_publication, $type_column);
+
+
+			if ($result_publication != false) {
+				$success = true;
+				$success_msg = "Ihr Publikation wurde erfolgreich erfasst.";
+			}else {
+				$error = true;
+				$error_msg = "Bei der Erfassung Ihrer Pulikation ist ein Fehler aufgetreten.";
+			}
+		}
+
+		$publication_list = get_my_publications($user_id);
+		$type_list = get_types();
 
 ?>
 
