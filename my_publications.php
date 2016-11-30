@@ -138,7 +138,7 @@ session_start();
 															case 'media':
 																	if (get_media($publication[$type_column[$i]])) {
 																		echo mysqli_fetch_assoc(get_media($publication[$type_column[$i]]))['media'];
-																	} else {													
+																	} else {
 																		echo "";
 																	}
 
