@@ -78,7 +78,7 @@ session_start();
           	<div class="panel panel-default">
 							<div class="panel-heading">
 				  			<h4 class="panel-title">Meine Publikationen
-									<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
+									<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#modal-new" aria-label="Left Align">
 					  				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 									</button>
 				  			</h4>
@@ -96,7 +96,7 @@ session_start();
 					  							<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													</button>
-													<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+													<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-trash" ></span>
 													</button>
 												</div>
@@ -152,8 +152,8 @@ session_start();
 		</div>
 	</div> <!-- /Container -->
 
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- Modal new publication -->
+	<div class="modal fade" id="modal-new" tabindex="-1" role="dialog" aria-labelledby="modal-new-label">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<form enctype="multipart/form-data" action="new_publication.php" method="post">
@@ -183,7 +183,33 @@ session_start();
 				</form>
 			</div>
 		</div>
-	</div><!-- /modal -->
+	</div><!-- /modal new publication -->
+
+	<!-- Modal delete publication -->
+	<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete-label">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form enctype="multipart/form-data" action="new_publication.php" method="post">
+
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Test</h4>
+					</div><!-- modal-header -->
+
+					<div class="modal-body">
+						<p>
+							Sind Sie sicher, dass Sie die Publikation "<?php  ?>" löschen möchten?
+						</p>
+					</div><!-- /modal-body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
+						<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
+					</div><!-- /modal-footer -->
+
+				</form>
+			</div>
+		</div>
+	</div><!-- /modal delete publication -->
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
