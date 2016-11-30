@@ -9,12 +9,12 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-	$publication_list = get_my_publications($user_id);
-	$type_list = get_types();
-
 	if(isset($_POST['delete-submit'])){
 		delete_publication($_POST['delete-submit']);
 	}
+
+	$publication_list = get_my_publications($user_id);
+	$type_list = get_types();
 
 ?>
 
@@ -208,7 +208,7 @@ session_start();
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
-						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit[]" value="">Löschen</button>
+						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit" value="">Löschen</button>
 					</div><!-- /modal-footer -->
 
 				</form>
