@@ -67,129 +67,123 @@ session_start();
     </div><!-- /.container-fluid -->
   </nav><!-- /Navigation -->
 
-  <div class="container">
+	<!-- Container -->
+	<div class="container">
     <div class="row">
       <div class="col-md-12"> <!-- Hauptinhalt -->
 
         <!-- Publikationen -->
         <div class="row">
           <div class="col-xs-12">
-
-
           	<div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">Meine Publikationen
-					<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</button>
-				  </h4>
-				</div>
-				<div class="panel-body">
-
-
-
-          	 <div class="panel-group" id="accordion">
-							 <?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-							<?php echo $publication['title'] ?>
-						</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-				  <div class="panel-body">
-						<?php switch ($publication['type']){
-							case 4: ?>
-								<table class="table-hover publi_table">
-									<tr>
-										<th>Titel:</th>
-										<td><?php echo $publication['title']; ?></td>
-									</tr>
-									<tr>
-										<th>Autor(en):</th>
-										<td>
-											<?php
-												$authors = get_authors($publication['publication_id']);
-												$author_result = "";
-												while($author = mysqli_fetch_assoc($authors)){
-													$author_result .= $author['firstname']." ".$author['lastname'].", ";
-												}
-												$author_result = substr_replace($author_result, ' ', -2, 1);
-												echo $author_result;
-											?>
-										</td>
-									</tr>
-									<tr>
-										<th>Datum:</th>
-										<td><?php echo $publication['date']; ?></td>
-									</tr>
-									<tr>
-										<th>Publikationsort:</th>
-										<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
-									</tr>
-									<tr>
-										<th>URL:</th>
-										<td><?php echo $publication['url'];?></td>
-									</tr>
-								</table>
-						<?php break; } ?>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-				<?php } ?>
-
-
-      </div> <!-- /Hauptinhalt -->
-    </div>
-
-		<!-- Modal -->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<form enctype="multipart/form-data" action="new_publication.php" method="post">
-
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
-								</div><!-- modal-header -->
-
-								<div class="modal-body">
-									<div class="form-group row">
-										<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
-											<div class="col-sm-5">
-												<select class="form-control form-control-sm float_right" id="Type" name="type">
-						      <?php while($type = mysqli_fetch_assoc($type_list)) { ?>
-               						<option value="<?php echo $type['type_id']; ?>"><?php echo $type['type']; ?></option>
-									<?php } ?>
-												</select>
+							<div class="panel-heading">
+				  			<h4 class="panel-title">Meine Publikationen
+									<button type="button" class="btn btn-default btn-sm float_right" data-toggle="modal" data-target="#myModal" aria-label="Left Align">
+					  				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+									</button>
+				  			</h4>
+							</div>
+							<div class="panel-body">
+          	 		<div class="panel-group" id="accordion">
+							 		<?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
+			  					<div class="panel panel-default">
+										<div class="panel-heading">
+				  						<h4 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+													<?php echo $publication['title'] ?>
+												</a>
+												<div class="btn-group float_right">
+					  							<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+						  							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+													</button>
+													<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+						  							<span class="glyphicon glyphicon-trash" ></span>
+													</button>
+												</div>
+				  						</h4>
 										</div>
-									</div>
-
-								</div><!-- /modal-body -->
-
-								<div class="modal-footer">
-									<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
-									<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
-								</div><!-- /modal-footer -->
-							</form>
-
+										<div id="collapse1" class="panel-collapse collapse">
+				  						<div class="panel-body">
+												<?php switch ($publication['type']){
+													case 4: ?>
+												<table class="table-hover publi_table">
+													<tr>
+														<th>Titel:</th>
+														<td><?php echo $publication['title']; ?></td>
+													</tr>
+													<tr>
+														<th>Autor(en):</th>
+														<td>
+															<?php
+																$authors = get_authors($publication['publication_id']);
+																$author_result = "";
+																while($author = mysqli_fetch_assoc($authors)){
+																	$author_result .= $author['firstname']." ".$author['lastname'].", ";
+																}
+																$author_result = substr_replace($author_result, ' ', -2, 1);
+																echo $author_result;
+															?>
+														</td>
+													</tr>
+													<tr>
+														<th>Datum:</th>
+														<td><?php echo $publication['date']; ?></td>
+													</tr>
+													<tr>
+														<th>Publikationsort:</th>
+														<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
+													</tr>
+													<tr>
+														<th>URL:</th>
+														<td><?php echo $publication['url'];?></td>
+													</tr>
+												</table>
+												<?php break; } ?>
+				  						</div><!--/table-body-->
+										</div>
+			  					</div><!--/panel-->
+									<?php } ?>
+      					</div>
+    					</div>
 						</div>
 					</div>
-				</div><!-- /modal -->
+				</div> <!-- /Publikationen -->
+			</div> <!-- /Hauptinhalt -->
+		</div>
+	</div> <!-- /Container -->
 
-  </div><!-- /container -->
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
+					</div><!-- modal-header -->
 
+					<div class="modal-body">
+						<div class="form-group row">
+							<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
+							<div class="col-sm-5">
+								<select class="form-control form-control-sm float_right" id="Type" name="type">
+						    <?php while($type = mysqli_fetch_assoc($type_list)) { ?>
+               		<option value="<?php echo $type['type_id']; ?>"><?php echo $type['type']; ?></option>
+								<?php } ?>
+								</select>
+							</div>
+						</div>
+					</div><!-- /modal-body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
+						<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
+					</div><!-- /modal-footer -->
+
+				</form>
+			</div>
+		</div>
+	</div><!-- /modal -->
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
