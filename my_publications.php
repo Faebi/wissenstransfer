@@ -87,11 +87,15 @@ session_start();
 							</div>
 							<div class="panel-body">
           	 		<div class="panel-group" id="accordion">
-							 		<?php while($publication = mysqli_fetch_assoc($publication_list)){ ?>
+							 		<?php while($publication = mysqli_fetch_assoc($publication_list)){
+										$type_label = get_type_label($publication['type']);
+										$type_column = get_type_column($publication['type']);
+										?>
+
 			  					<div class="panel panel-default">
 										<div class="panel-heading">
 				  						<h4 class="panel-title">
-												<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+												<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>">
 													<?php echo $publication['title'] ?>
 												</a>
 												<div class="btn-group float_right">
@@ -104,15 +108,16 @@ session_start();
 												</div>
 				  						</h4>
 										</div>
-										<div id="collapse1" class="panel-collapse collapse">
+
+										<div id="collapse<?php echo $publication['publication_id']?>" class="panel-collapse collapse">
 				  						<div class="panel-body">
-												<?php switch ($publication['type']){
-													case 4: ?>
 												<table class="table-hover publi_table">
+													<?php	for ($i = 0; $i < 2; $i++) {?>
 													<tr>
-														<th>Titel:</th>
-														<td><?php echo $publication['title']; ?></td>
+														<th><?php echo $type_label[$i]; ?></th>
+														<td><?php echo $publication[$type_column[$i]]; ?></td>
 													</tr>
+													<?php } ?>
 													<tr>
 														<th>Autor(en):</th>
 														<td>
@@ -127,20 +132,16 @@ session_start();
 															?>
 														</td>
 													</tr>
+													
+													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
 													<tr>
-														<th>Datum:</th>
-														<td><?php echo $publication['date']; ?></td>
+														<th><?php echo $type_label[$i]; ?></th>
+														<td><?php echo $publication[$type_column[$i]]; ?></td>
 													</tr>
-													<tr>
-														<th>Publikationsort:</th>
-														<td><?php echo mysqli_fetch_array(get_media($publication['media']))['media']; ?></td>
-													</tr>
-													<tr>
-														<th>URL:</th>
-														<td><?php echo $publication['url'];?></td>
-													</tr>
+													<?php } ?>
+
+
 												</table>
-												<?php break; } ?>
 				  						</div><!--/table-body-->
 										</div>
 			  					</div><!--/panel-->
