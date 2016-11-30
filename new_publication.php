@@ -9,11 +9,39 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	$error = false;
+	$error_msg = "";
+	$success = false;
+	$success_msg = "";
+
 	$type_id = filter_data($_POST['type']);
 	$type = mysqli_fetch_assoc(get_type_name($type_id))['type'];
 
+	$user_list = get_all_users();
+
 	$type_label = get_type_label($type_id);
 	$type_column = get_type_column($type_id);
+
+
+	if(isset($_POST['new-submit'])){
+		$new_publication[0] = filter_data($_POST['author']);
+		for ($i=1; $i < count($type_column) ; $i++) {
+			$new_publication[$i] = filter_data($_POST[$type_column[$i]]);
+		}
+
+
+		$result_publication = save_publication($new_publication, $type_column);
+
+
+			if ($result_publication != false) {
+				$success = true;
+				$success_msg = "Ihr Publikation wurde erfolgreich erfasst.";
+			}else {
+				$error = true;
+				$error_msg = "Bei der Erfassung Ihrer Pulikation ist ein Fehler aufgetreten.";
+			}
+		}
+
 ?>
 
 <!DOCTYPE html>
@@ -82,16 +110,36 @@ session_start();
 							</div>
 							<div class="panel-body">
 								<form enctype="multipart/form-data" action="my_publications.php" method="post">
-									<?php for ($i = 0; $i < count($type_label); $i++) {?>
+									<?php for ($i = 0; $i < 2; $i++) {?>
 										<div class="form-group row col-sm-offset-2">
 											<label for="Titel" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
 											<div class="col-sm-7">
-												<input type="text" class="form-control form-control-sm" id="Titel" name="title">
+												<input type="text" class="form-control form-control-sm" id="Titel" name="<?php echo $type_column[$i]; ?>">
 											</div>
 										</div>
 								<?php 	} ?>
 
-									<button type="submit" class="btn float_right" name="new_submit">Speichern</button>
+								<div class="form-group row col-sm-offset-2">
+									<label for="Titel" class="col-sm-1 form-control-label">Autor(en)</label>
+									<div class="col-sm-7">
+										<select class="form-control form-control-sm float_right" id="Type" name="author">
+										<?php while($user = mysqli_fetch_assoc($user_list)) { ?>
+											<option value="<?php echo $user['user_id']; ?>"><?php echo $user['lastname']." ".$user['firstname']; ?></option>
+										<?php } ?>
+										</select>
+									</div>
+								</div>
+
+								<?php for ($i = 2; $i < count($type_label); $i++) {?>
+									<div class="form-group row col-sm-offset-2">
+										<label for="Titel" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control form-control-sm" id="Titel" name="<?php echo $type_column[$i]; ?>">
+										</div>
+									</div>
+							<?php 	} ?>
+
+									<button type="submit" class="btn float_right" name="new-submit">Speichern</button>
 								</form>
 		  				</div>
           	</div>

@@ -86,6 +86,11 @@
 		return get_result($sql);
 	}
 
+	function get_all_users(){
+		$sql = "SELECT user_id, firstname, lastname FROM user;";
+		return get_result($sql);
+	}
+
 	function get_types(){
 		$sql = "SELECT * FROM type;";
 		return get_result($sql);
@@ -128,6 +133,24 @@
 	/* *********************************************************
 	/* new_publication
 	/* ****************************************************** */
+
+	function save_publication($user_id, $new_publication, $type_column){
+  	$sql_ok = false;
+    if(count($new_publication) == count($type_column)) {
+			$sql = "UPDATE publications SET password = $new_password WHERE user_id = $user_id;";
+			for ($i=0; $i < count($type_column); $i++) {
+				# code...
+			}
+  		$sql_ok = true;
+    }
+  	if($sql_ok){
+  	  return get_result($sql);
+  	}else{
+  		return false;
+  	}
+  }
+
+
 
 	function get_type_label($type_id){
 		$type_label = array();
