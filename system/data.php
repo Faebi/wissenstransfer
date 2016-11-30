@@ -136,20 +136,23 @@
 
 	function save_publication($user_id, $new_publication, $type_column){
   	$sql_ok = false;
-    if(count($new_publication) == count($type_column)) {
-			$sql = "UPDATE publications SET password = $new_password WHERE user_id = $user_id;";
-			for ($i=0; $i < count($type_column); $i++) {
-				# code...
-			}
-  		$sql_ok = true;
-    }
-  	if($sql_ok){
-  	  return get_result($sql);
-  	}else{
-  		return false;
-  	}
-  }
+		$sql = "INSERT INTO publications (last_edited, ";
 
+		for ($i=0; $i < count($type_column); $i++) {
+			$sql .= "$type_column[$i], ";
+		}
+		$sql = substr_replace($sql, ' ', -2, 1);
+		$sql .= ") VALUES ($user_id, ";
+
+		for ($i=0; $i < count($type_); $i++) {
+			$sql .= "$new_publication[$i], ";
+		}
+
+		$sql = substr_replace($sql, ' ', -2, 1);
+		$sql .= ") ;";
+
+    return get_result($sql);
+  	}
 
 
 	function get_type_label($type_id){

@@ -24,13 +24,12 @@ session_start();
 
 
 	if(isset($_POST['new-submit'])){
-		$new_publication[0] = filter_data($_POST['author']);
-		for ($i=1; $i < count($type_column) ; $i++) {
+			$new_publication = array();
+		for ($i=0; $i < count($type_column) ; $i++) {
 			$new_publication[$i] = filter_data($_POST[$type_column[$i]]);
 		}
 
-
-		$result_publication = save_publication($new_publication, $type_column);
+		$result_publication = save_publication($user_id, $new_publication, $type_column);
 
 
 			if ($result_publication != false) {
