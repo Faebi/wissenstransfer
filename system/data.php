@@ -141,7 +141,6 @@
 				$type_label[5] = "Ort";
 				return $type_label;
 				break;
-
 			case '2':
 				$type_label[0] = "Titel";
 				$type_label[1] = "Untertitel";
@@ -153,7 +152,6 @@
 				$type_label[7] = "Seitenzahl";
 				return $type_label;
 				break;
-
 			case '3':
 				$type_label[0] = "Titel";
 				$type_label[1] = "Untertitel";
@@ -165,38 +163,35 @@
 				$type_label[7] = "Seitenzahl";
 				return $type_label;
 				break;
-
-				case '4':
+			case '4':
 				$type_label[0] = "Titel";
-					$type_label[1] = "Untertitel";
-					$type_label[2] = "Datum";
-					$type_label[3] = "Blog";
-					$type_label[4] = "URL";
-					$type_label[5] = "Ort";
-					return $type_label;
-					break;
-
-				case '5':
-					$type_label[0] = "Titel";
-					$type_label[1] = "Untertitel";
-					$type_label[2] = "Datum";
-					$type_label[3] = "Veranstaltung";
-					$type_label[4] = "URL";
-					$type_label[5] = "Ort";
-					return $type_label;
-					break;
-
-				case '6':
-					$type_label[0] = "Titel";
-					$type_label[1] = "Untertitel";
-					$type_label[2] = "Datum";
-					$type_label[3] = "Medium";
-					$type_label[4] = "URL";
-					$type_label[5] = "Ort";
-					$type_label[6] = "Ausgabe";
-					$type_label[7] = "Seitenzahl";
-					return $type_label;
-					break;
+				$type_label[1] = "Untertitel";
+				$type_label[2] = "Datum";
+				$type_label[3] = "Blog";
+				$type_label[4] = "URL";
+				$type_label[5] = "Ort";
+				return $type_label;
+				break;
+			case '5':
+				$type_label[0] = "Titel";
+				$type_label[1] = "Untertitel";
+				$type_label[2] = "Datum";
+				$type_label[3] = "Veranstaltung";
+				$type_label[4] = "URL";
+				$type_label[5] = "Ort";
+				return $type_label;
+				break;
+			case '6':
+				$type_label[0] = "Titel";
+				$type_label[1] = "Untertitel";
+				$type_label[2] = "Datum";
+				$type_label[3] = "Medium";
+				$type_label[4] = "URL";
+				$type_label[5] = "Ort";
+				$type_label[6] = "Ausgabe";
+				$type_label[7] = "Seitenzahl";
+				return $type_label;
+				break;
 			default:
 				break;
 		}
@@ -214,7 +209,6 @@
 				$type_column[5] = "location";
 				return $type_column;
 				break;
-
 			case '2':
 				$type_column[0] = "title";
 				$type_column[1] = "subtitle";
@@ -224,8 +218,8 @@
 				$type_column[5] = "location";
 				$type_column[6] = "series";
 				$type_column[7] = "page_nr";
+				return $type_column;
 				break;
-
 			case '3':
 				$type_column[0] = "title";
 				$type_column[1] = "subtitle";
@@ -235,8 +229,8 @@
 				$type_column[5] = "location";
 				$type_column[6] = "series";
 				$type_column[7] = "page_nr";
+				return $type_column;
 				break;
-
 			case '4':
 				$type_column[0] = "title";
 				$type_column[1] = "subtitle";
@@ -244,8 +238,8 @@
 				$type_column[3] = "media";
 				$type_column[4] = "url";
 				$type_column[5] = "location";
+				return $type_column;
 				break;
-
 			case '5':
 				$type_column[0] = "title";
 				$type_column[1] = "subtitle";
@@ -253,8 +247,8 @@
 				$type_column[3] = "media";
 				$type_column[4] = "url";
 				$type_column[5] = "location";
+				return $type_column;
 				break;
-
 			case '6':
 				$type_column[0] = "title";
 				$type_column[1] = "subtitle";
@@ -264,8 +258,8 @@
 				$type_column[5] = "location";
 				$type_column[6] = "series";
 				$type_column[7] = "page_nr";
+				return $type_column;
 				break;
-
 			default:
 				break;
 		}
