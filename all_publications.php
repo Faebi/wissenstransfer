@@ -9,6 +9,10 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	if(isset($_POST['delete-submit'])){
+		delete_publication($_POST['delete-submit']);
+	}
+
 	$publication_list = get_all_publications();
 	$type_list = get_types();
 
@@ -93,14 +97,12 @@ session_start();
 		 							<div class="panel panel-default">
 		 								<div class="panel-heading">
 			 								<h4 class="panel-title">
-				 								<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id'];?>">
-					 								<?php echo $publication['title'] ?>
-				 								</a>
+				 								<a class="publication_title" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>"><?php echo $publication['title'] ?></a>
 			 									<div class="btn-group float_right">
 					 								<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 					 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 				 									</button>
-				 									<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
+				 									<button type="button" class="btn btn-danger btn-sm pub-delete" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
 					 									<span class="glyphicon glyphicon-trash" ></span>
 				 									</button>
 			 									</div>
@@ -205,10 +207,45 @@ session_start();
 		</div>
 	</div><!-- /modal -->
 
+	<!-- Modal delete publication -->
+	<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete-label">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">Test</h4>
+					</div><!-- modal-header -->
+
+					<div class="modal-body">
+						<p>
+							Sind Sie sicher, dass Sie die Publikation "<span class="modal-pubtitle"></span>" löschen möchten?
+						</p>
+					</div><!-- /modal-body -->
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
+						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit" value="">Löschen</button>
+					</div><!-- /modal-footer -->
+
+				</form>
+			</div>
+		</div>
+	</div><!-- /modal delete publication -->
+
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$('.pub-delete').click(function() {
+			var pubId = $(this).attr('value');
+			$('.delete-submit').val(pubId);
+
+			var pubTitle = $(this).closest('.panel-heading').find('.publication_title').text();
+			$('.modal-pubtitle').text(pubTitle);
+		});
+	</script>
 </body>
 </html>
