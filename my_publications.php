@@ -12,6 +12,8 @@ session_start();
 	$publication_list = get_my_publications($user_id);
 	$type_list = get_types();
 
+	$delete_publication_id = NULL;
+
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +98,7 @@ session_start();
 					  							<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 													</button>
-													<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
+													<button type="button" class="btn btn-danger btn-sm pub-delete" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
 						  							<span class="glyphicon glyphicon-trash" ></span>
 													</button>
 												</div>
@@ -189,21 +191,23 @@ session_start();
 	<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete-label">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form enctype="multipart/form-data" action="new_publication.php" method="post">
+				<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
 					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">Test</h4>
+						<h4 class="modal-title" id="myModalLabel">Publikation löschen</h4>
 					</div><!-- modal-header -->
 
 					<div class="modal-body">
 						<p>
-							Sind Sie sicher, dass Sie die Publikation "<?php  ?>" löschen möchten?
+							Sind Sie sicher, dass Sie die Publikation "<span></span>" löschen möchten?
+
+								<!-- <span class="modal-pubid"></span> -->
 						</p>
 					</div><!-- /modal-body -->
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
-						<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
+						<button type="submit" class="btn btn-success btn-sm" name="delete-submit" value="<span id="modal-pubid"></span>">Löschen</button>
 					</div><!-- /modal-footer -->
 
 				</form>
@@ -216,5 +220,11 @@ session_start();
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$('.pub-delete').click(function() {
+			var pubId = $(this).attr('value');
+			$('#modal-pubid').text(pubId);
+		});
+	</script>
 </body>
 </html>
