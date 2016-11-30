@@ -30,7 +30,7 @@
 	function get_result($sql)
 	{
 		$db = get_db_connection();
-    // echo $sql ."<br>";
+     echo $sql ."<br>";
 		$result = mysqli_query($db, $sql);
 		mysqli_close($db);
 		return $result;
@@ -61,8 +61,8 @@
 		return get_result($sql);
 	}
 
-	function delete_publication($post_id){
-    $sql = "DELETE FROM publications WHERE post_id = $post_id ;";
+	function delete_publication($publication_id){
+    $sql = "DELETE FROM publications WHERE publication_id = $publication_id;";
 		return get_result($sql);
 	}
 
