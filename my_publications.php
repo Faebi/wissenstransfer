@@ -13,17 +13,17 @@ session_start();
 		delete_publication($_POST['delete-submit']);
 	}
 
-	$type_label = get_type_label($type_id);
-	$type_column = get_type_column($type_id);
 
 	if(isset($_POST['new-submit'])){
-			$new_publication = array();
+		$type_id = $_POST['type-id'];
+		$type_label = get_type_label($type_id);
+		$type_column = get_type_column($type_id);
+		$new_publication = array();
 		for ($i=0; $i < count($type_column) ; $i++) {
 			$new_publication[$i] = filter_data($_POST[$type_column[$i]]);
 		}
 
-		$result_publication = save_publication($user_id, $new_publication, $type_column);
-
+		$result_publication = add_publication($user_id, $new_publication, $type_column, $type_id, $_POST['author']);
 
 			if ($result_publication != false) {
 				$success = true;
