@@ -6,9 +6,14 @@ session_start();
   	$user_id = $_SESSION['user_id'];
 	}
 
+	// externe Dateien Laden test
+	// data.php beinhaltet alle DB-Anweisungen wie SELECT, INSERT, UPDATE, etc.
+	// Funktionen in data.php liefern das Ergebnis der Anweisungen zurück
+	// security.php enthält sicherheitsrelevante Funktionen
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	// für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg & $success, $success_msg
 	$error = false;
 	$error_msg = "";
 	$success = false;
@@ -17,7 +22,6 @@ session_start();
 	if(isset($_POST['delete-submit'])){
 		delete_publication($_POST['delete-submit']);
 	}
-
 
 	if(isset($_POST['new-submit'])){
 		$type_id = $_POST['type-id'];
@@ -28,6 +32,7 @@ session_start();
 			$new_publication[$i] = filter_data($_POST[$type_column[$i]]);
 		}
 
+		// Liefert alle Infos zur neuer Publikationserfassung und Autor
 		$result_publication = add_publication($user_id, $new_publication, $type_column, $type_id);
 		$result_author = add_author($_POST['author']);
 
@@ -35,22 +40,25 @@ session_start();
 				$success = true;
 				$success_msg = "Ihre Publikation wurde erfolgreich erfasst.";
 			}else {
+				// Fehlermeldungen werden erst später angezeigt
 				$error = true;
 				$error_msg = "Bei der Erfassung Ihrer Pulikation ist ein Fehler aufgetreten.";
 			}
 
 			if ($result_author != false) {
+				// Fehlermeldungen werden erst später angezeigt
 				$success = true;
 				$success_msg .= "Der Autor wurde erfolgreich erfasst.";
 			}else {
+				// Fehlermeldungen werden erst später angezeigt
 				$error = true;
 				$error_msg .= "Der Autor konnte nicht erfasst werden.";
 			}
 		}
 
+		// Liefert alle Infos zur meinen Publikationen und Erfassungstypen
 		$publication_list = get_my_publications($user_id);
 		$type_list = get_types();
-
 ?>
 
 <!DOCTYPE html>
@@ -145,6 +153,7 @@ session_start();
 				  						</h4>
 										</div>
 
+										<!-- Collapse-Angaben für Titel und Untertiel -->
 										<div id="collapse<?php echo $publication['publication_id'];?>" class="panel-collapse collapse">
 				  						<div class="panel-body">
 												<table class="table-hover publi_table">
@@ -153,7 +162,9 @@ session_start();
 														<th><?php echo $type_label[$i]; ?></th>
 														<td><?php echo $publication[$type_column[$i]]; ?></td>
 													</tr>
-													<?php } ?>
+													<?php } ?> <!-- /Collapse-Angaben für Titel und Untertiel -->
+
+													<!-- Collapse-Angaben für Autor -->
 													<tr>
 														<th>Autor(en):</th>
 														<td>
@@ -167,8 +178,9 @@ session_start();
 																echo $author_result;
 															?>
 														</td>
-													</tr>
+													</tr><!-- /Collapse-Angaben für Autor -->
 
+													<!-- Collapse-Angaben für restliche Formularfelder -->
 													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
 													<tr>
 														<th><?php echo $type_label[$i]; ?></th>
@@ -192,7 +204,7 @@ session_start();
 																echo $publication[$type_column[$i]];
 																break;
 															}?></td>
-													</tr>
+													</tr> <!-- Collapse-Angaben für restliche Formularfelder -->
 													<?php } ?>
 
 
@@ -233,10 +245,12 @@ session_start();
 			<div class="modal-content">
 				<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
+					<!-- modal-header -->
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
-					</div><!-- modal-header -->
+					</div><!-- /modal-header -->
 
+					<!-- modal-body -->
 					<div class="modal-body">
 						<div class="form-group row">
 							<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
@@ -250,6 +264,7 @@ session_start();
 						</div>
 					</div><!-- /modal-body -->
 
+					<!-- modal-footer -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
 						<button type="submit" class="btn btn-success btn-sm" name="add-submit">Erfassen</button>
@@ -266,16 +281,19 @@ session_start();
 			<div class="modal-content">
 				<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
+					<!-- modal-header -->
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Test</h4>
-					</div><!-- modal-header -->
+					</div><!-- /modal-header -->
 
+					<!-- modal-body -->
 					<div class="modal-body">
 						<p>
 							Sind Sie sicher, dass Sie die Publikation "<span class="modal-pubtitle"></span>" löschen möchten?
 						</p>
 					</div><!-- /modal-body -->
 
+					<!-- modal-footer -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
 						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit" value="">Löschen</button>

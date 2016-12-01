@@ -6,10 +6,12 @@ session_start();
   	$user_id = $_SESSION['user_id'];
 	}
 
+	// externe Dateien Laden test
+	// data.php beinhaltet alle DB-Anweisungen wie SELECT, INSERT, UPDATE, etc.
+	// Funktionen in data.php liefern das Ergebnis der Anweisungen zurück
+	// security.php enthält sicherheitsrelevante Funktionen
 	require_once("system/data.php");
 	require_once("system/security.php");
-
-
 ?>
 
 <!DOCTYPE html>
