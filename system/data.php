@@ -57,7 +57,7 @@
 	}
 
 	function delete_publication($publication_id){
-    $sql = "DELETE FROM publications WHERE publication_id = $publication_id;";
+    $sql = "DELETE FROM publications WHERE publication_id = $publication_id; DELETE FROM publishes WHERE publicaton = $publication_id;";
 		return get_result($sql);
 	}
 
@@ -301,6 +301,23 @@
 		}
 	}
 
+	/* *********************************************************
+	/* edit_publication
+	/* ****************************************************** */
 
+	function get_publication($publication_id){
+		$sql = "SELECT * FROM publications WHERE publication_id = $publication_id;";
+		return get_result($sql);
+	}
+
+	function get_media_value($media_id){
+		$sql = "SELECT * FROM media WHERE media_id = $media_id;";
+		return get_result($sql);
+	}
+
+	function get_location_value($location_id){
+		$sql = "SELECT * FROM locatin WHERE media_id = $location_id;";
+		return get_result($sql);
+	}
 
 ?>
