@@ -140,6 +140,14 @@ session_start();
 										</div>
 									</div><!-- /Restliche Formularfelder -->
 							<?php 	} ?>
+
+									<div>
+										<input type="text" class="form-control form-control-sm hidden" name="publication-id" value= "<?php echo $publication_id; ?>">
+									</div>
+									<div>
+										<input type="text" class="form-control form-control-sm hidden" name="type-id" value= "<?php echo $type_id; ?>">
+									</div>
+
 									<div class="float_right">
 										<a href="my_publications" type="button"><button class="btn">Abbrechen</button></a>
 										<button type="submit" class="btn btn-success" name="edit-submit">Speichern</button>

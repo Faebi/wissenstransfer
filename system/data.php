@@ -185,6 +185,47 @@
 		return get_result($sql);
 	}
 
+	function edit_publication($user_id, $updated_publication, $type_column, $publication_id){
+		$sql = "UPDATE publications SET ";
+
+		for ($i=0; $i < count($updated_publication); $i++) {
+			if ($type_column[$i] == 'media'){
+				$media_check = check_media($updated_publication[$i]);
+				if($media_check){
+					$sql .= "media = " . mysqli_fetch_assoc($media_check['media_id']) . ", ";
+				} else {
+					new_media($updated_publication[$i]);
+					$new_media_id = mysqli_fetch_assoc(get_last_media())['media_id'];
+					$sql .= "media = " . $new_media_id . ", ";
+				}
+			} elseif ($type_column[$i] == 'location') {
+				if ($type_column[$i] == 'location'){
+					$location_check = check_location($updated_publication[$i]);
+					if($location_check){
+						$sql .= "location = " . mysqli_fetch_assoc($location_check['location_id']) . ", ";
+					} else {
+						new_location($updated_publication[$i]);
+						$new_location_id = mysqli_fetch_assoc(get_last_location())['location_id'];
+						$sql .= "location = " . $new_location_id . ", ";
+					}
+			} else {
+				$sql .= $type_column[$i]. " = '" . $updated_publication[$i] . "', ";
+			}
+		}
+
+		$sql = substr_replace($sql, ' ', -2, 1);
+		$sql .= " WHERE publication_id = $publication_id;";
+
+		return get_result($sql);
+		}
+	}
+
+	function edit_author($author, $publication_id){
+		$ranking = 1;
+		$sql = "UPDATE publishes SET user = $author WHERE publication = $publication_id;";
+		return get_result($sql);
+	}
+
 
 	/* *********************************************************
 	/* Profil

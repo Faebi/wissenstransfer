@@ -54,7 +54,20 @@ session_start();
 				$error = true;
 				$error_msg .= "Der Autor konnte nicht erfasst werden.";
 			}
+	}
+
+	if(isset($_POST['edit-submit'])){
+		$type_id = $_POST['type-id'];
+		$publication_id = $_POST['publication-id'];
+		$type_column = get_type_column($type_id);
+		$updated_publication = array();
+		for ($i=0; $i < count($type_column) ; $i++) {
+			$updated_publication[$i] = filter_data($_POST[$type_column[$i]]);
 		}
+
+		$result_publication = edit_publication($user_id, $updated_publication, $type_column, $publication_id);
+		$result_author = edit_author($_POST['author'], $publication_id);
+	}
 
 		// Liefert alle Infos zur meinen Publikationen und Erfassungstypen
 		$publication_list = get_my_publications($user_id);
