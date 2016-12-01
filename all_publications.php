@@ -11,6 +11,7 @@ session_start();
 
 	if(isset($_POST['delete-submit'])){
 		delete_publication($_POST['delete-submit']);
+		delete_publishes($_POST['delete-submit']);
 	}
 
 	$publication_list = get_all_publications();

@@ -120,7 +120,7 @@ session_start();
 							<?php 	} ?>
 
 									<div>
-										<input hidden type="text" class="form-control form-control-sm" name="type-id" value= "<?php echo $type_id; ?>">
+										<input type="text" class="form-control form-control-sm hidden" name="type-id" value= "<?php echo $type_id; ?>">
 									</div>
 
 									<button type="submit" class="btn float_right" name="new-submit">Speichern</button>

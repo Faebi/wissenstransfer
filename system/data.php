@@ -57,7 +57,12 @@
 	}
 
 	function delete_publication($publication_id){
-    $sql = "DELETE FROM publications WHERE publication_id = $publication_id; DELETE FROM publishes WHERE publication = $publication_id;";
+    $sql = "DELETE FROM publications WHERE publication_id = $publication_id;";
+		return get_result($sql);
+	}
+
+	function delete_publishes($publication_id){
+		$sql = "DELETE FROM publishes WHERE publication = $publication_id;";
 		return get_result($sql);
 	}
 
