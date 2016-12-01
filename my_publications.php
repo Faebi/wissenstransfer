@@ -9,6 +9,11 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	$error = false;
+	$error_msg = "";
+	$success = false;
+	$success_msg = "";
+
 	if(isset($_POST['delete-submit'])){
 		delete_publication($_POST['delete-submit']);
 	}
@@ -23,14 +28,23 @@ session_start();
 			$new_publication[$i] = filter_data($_POST[$type_column[$i]]);
 		}
 
-		$result_publication = add_publication($user_id, $new_publication, $type_column, $type_id, $_POST['author']);
+		$result_publication = add_publication($user_id, $new_publication, $type_column, $type_id);
+		$result_author = add_author($_POST['author']);
 
 			if ($result_publication != false) {
 				$success = true;
-				$success_msg = "Ihr Publikation wurde erfolgreich erfasst.";
+				$success_msg = "Ihre Publikation wurde erfolgreich erfasst.";
 			}else {
 				$error = true;
 				$error_msg = "Bei der Erfassung Ihrer Pulikation ist ein Fehler aufgetreten.";
+			}
+
+			if ($result_author != false) {
+				$success = true;
+				$success_msg .= "Der Autor wurde erfolgreich erfasst.";
+			}else {
+				$error = true;
+				$error_msg .= "Der Autor konnte nicht erfasst werden.";
 			}
 		}
 
@@ -193,6 +207,23 @@ session_start();
 				</div> <!-- /Publikationen -->
 			</div> <!-- /Hauptinhalt -->
 		</div>
+
+		<?php
+			// Ausgabe von Fehlermeldungen
+			if($error == true){   //gibt es einen Fehler?
+		?>
+				<div class="alert alert-danger" role="alert"><?php echo $error_msg; ?></div>
+		<?php
+			}
+
+			// Ausgabe von Erfolgsmeldungen
+			if($success == true){   //gibt es einen Fehler?
+		?>
+				<div class="alert alert-success" role="alert"><?php echo $success_msg; ?></div>
+		<?php
+			}
+		?>
+
 	</div> <!-- /Container -->
 
 	<!-- Modal new publication -->
@@ -253,6 +284,7 @@ session_start();
 			</div>
 		</div>
 	</div><!-- /modal delete publication -->
+
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
