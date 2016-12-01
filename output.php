@@ -70,6 +70,7 @@ session_start();
       <div class="col-md-12"> <!-- Hauptinhalt -->
         <div class="row">
           <div class="col-xs-12">
+<<<<<<< HEAD
           	<div class="panel panel-default">
 							<div class="panel-heading">
 				  			<h4 class="panel-title">Ausgabe</h4>
@@ -87,6 +88,25 @@ session_start();
       </div> <!-- /Hauptinhalt -->
     </div>
   </div>
+=======
+
+
+      <div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">Ausgabe</h4>
+				</div>
+				<div class="panel-body">
+
+				</div>
+			</div><!--/panel-->
+		</div> <!-- /col-sx-12 -->
+		  </div> <!-- /row -->
+		</div> <!-- /col-md-12 -->
+        </div> <!-- /Publikationen -->
+		</div>
+
+
+>>>>>>> 14fd5ee143b412658b065e83efe252282a30f4a4
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
