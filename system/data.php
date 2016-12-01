@@ -96,6 +96,44 @@
 		return get_result($sql);
 	}
 
+	function add_publication($user_id, $new_publication, $type_column, $type_id){
+		$sql = "INSERT INTO publications (last_edited, type, ";
+
+		for ($i=0; $i < count($type_column); $i++) {
+			$sql .= "$type_column[$i], ";
+		}
+
+		$sql = substr_replace($sql, ' ', -2, 1);
+		$sql .= ") VALUES ($user_id, $type_id, ";
+
+		for ($i=0; $i < count($new_publication); $i++) {
+			if ($type_column[$i] == 'media' OR $type_column[$i] == 'location') {
+				$sql .= "$new_publication[$i], ";
+			} else {
+				$sql .= "'"."$new_publication[$i]"."', ";
+			}
+		}
+
+		$sql = substr_replace($sql, ' ', -2, 1);
+		$sql .= ") ;";
+
+		return get_result($sql);
+		}
+
+		function get_last_publication(){
+			$sql = "SELECT publication_id FROM publications ORDER BY publication_id DESC LIMIT 1;";
+			echo $sql;
+			return get_result($sql);
+		}
+
+		function add_author($author){
+			$ranking = 1;
+			$publication = mysqli_fetch_assoc(get_last_publication())['publication_id'];
+			$sql = "INSERT INTO publishes (user, publication, ranking) VALUES ($author, $publication, $ranking);";
+			echo $sql;
+			return get_result($sql);
+		}
+
 
 	/* *********************************************************
 	/* Profil
@@ -117,42 +155,14 @@
       $sql = "UPDATE user SET password = $new_password WHERE user_id = $user_id;";
   		$sql_ok = true;
     }
-  	if($sql_ok){
+
   	  return get_result($sql);
-  	}else{
-  		return false;
-  	}
   }
 
 
 	/* *********************************************************
 	/* new_publication
 	/* ****************************************************** */
-
-	function add_publication($user_id, $new_publication, $type_column, $type_id, $author){
-  	$sql_ok = false;
-		$sql = "INSERT INTO publications (last_edited, type, ";
-
-		for ($i=0; $i < count($type_column); $i++) {
-			$sql .= "$type_column[$i], ";
-		}
-
-		$sql = substr_replace($sql, ' ', -2, 1);
-		$sql .= ") VALUES ($user_id, $type_id, ";
-
-		for ($i=0; $i < count($new_publication); $i++) {
-			if ($type_column[$i] == 'media' OR $type_column[$i] == 'location') {
-				$sql .= "$new_publication[$i], ";
-			} else {
-				$sql .= "'"."$new_publication[$i]"."', ";
-			}
-		}
-
-		$sql = substr_replace($sql, ' ', -2, 1);
-		$sql .= ") ;";
-		echo $sql;
-    return get_result($sql);
-  	}
 
 
 	function get_type_label($type_id){
