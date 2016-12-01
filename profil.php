@@ -13,7 +13,7 @@ session_start();
 	require_once("system/data.php");
 	require_once("system/security.php");
 
-	// für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg
+	// für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg & $success, $success_msg
 	$error = false;
 	$error_msg = "";
 	$success = false;

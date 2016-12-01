@@ -6,14 +6,20 @@ session_start();
   	$user_id = $_SESSION['user_id'];
 	}
 
+	// externe Dateien Laden test
+	// data.php beinhaltet alle DB-Anweisungen wie SELECT, INSERT, UPDATE, etc.
+	// Funktionen in data.php liefern das Ergebnis der Anweisungen zurück
+	// security.php enthält sicherheitsrelevante Funktionen
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	// für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg & $success, $success_msg
 	$error = false;
 	$error_msg = "";
 	$success = false;
 	$success_msg = "";
 
+	// Werte aus POST-Array auf SQL-Injections prüfen und in Variablen schreiben
 	$publication_id = filter_data($_POST['publication_id']);
 	$publication = mysqli_fetch_assoc(get_publication($publication_id));
 
@@ -27,11 +33,12 @@ session_start();
 		$location = mysqli_fetch_assoc(get_media_value($publication['location']))['location'];
 	}else{ $location = ""; }
 
+	// Liefert alle Infos zu User
 	$user_list = get_all_users();
 
+	// Liefert alle Infos zur Formulartiteln und Spaltentitel der DB
 	$type_label = get_type_label($type_id);
 	$type_column = get_type_column($type_id);
-
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +114,7 @@ session_start();
 											<div class="col-sm-7">
 												<input type="text" class="form-control form-control-sm" id="<?php echo $type_label[$i]; ?>" name="<?php echo $type_column[$i]; ?>" value="<?php echo $publication[$type_column[$i]] ?>">
 											</div>
-										</div>
+										</div><!-- /Title & Subtitle Formular -->
 								<?php 	} ?>
 								<!-- Autorenformular -->
 								<div class="form-group row col-sm-offset-2">
@@ -119,7 +126,7 @@ session_start();
 										<?php } ?>
 										</select>
 									</div>
-								</div>
+								</div><!-- /Autorenformular -->
 								<!-- Restliche Formularfelder -->
 								<?php for ($i = 2; $i < count($type_label); $i++) {?>
 									<div class="form-group row col-sm-offset-2">
@@ -131,7 +138,7 @@ session_start();
 												elseif($type_column[$i]=="location"){echo $location;}
 												else{echo $publication[$type_column[$i]];} ?>">
 										</div>
-									</div>
+									</div><!-- /Restliche Formularfelder -->
 							<?php 	} ?>
 									<div class="float_right">
 										<a href="my_publications" type="button"><button class="btn">Abbrechen</button></a>

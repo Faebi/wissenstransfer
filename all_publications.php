@@ -6,6 +6,10 @@ session_start();
   	$user_id = $_SESSION['user_id'];
 	}
 
+	// externe Dateien Laden test
+	// data.php beinhaltet alle DB-Anweisungen wie SELECT, INSERT, UPDATE, etc.
+	// Funktionen in data.php liefern das Ergebnis der Anweisungen zurück
+	// security.php enthält sicherheitsrelevante Funktionen
 	require_once("system/data.php");
 	require_once("system/security.php");
 
@@ -14,6 +18,7 @@ session_start();
 		delete_publishes($_POST['delete-submit']);
 	}
 
+	// Liefert alle Infos zur Publikationsliste und Erfassungstypen
 	$publication_list = get_all_publications();
 	$type_list = get_types();
 
@@ -111,15 +116,19 @@ session_start();
 			 								</h4>
 		 								</div>
 
+										<!-- Collapse-Angaben für Titel und Untertiel -->
 										<div id="collapse<?php echo $publication['publication_id'];?>" class="panel-collapse collapse">
 				  						<div class="panel-body">
+												<!-- Formulartabelle -->
 												<table class="table-hover publi_table">
 													<?php	for ($i = 0; $i < 2; $i++) {?>
 													<tr>
 														<th><?php echo $type_label[$i]; ?></th>
 														<td><?php echo $publication[$type_column[$i]]; ?></td>
 													</tr>
-													<?php } ?>
+													<?php } ?> <!-- /Collapse-Angaben für Titel und Untertiel -->
+
+													<!-- Collapse-Angaben für Autor -->
 													<tr>
 														<th>Autor(en):</th>
 														<td>
@@ -133,8 +142,9 @@ session_start();
 																echo $author_result;
 															?>
 														</td>
-													</tr>
+													</tr> <!-- /Collapse-Angaben für Autor -->
 
+													<!-- Collapse-Angaben für restliche Formularfelder -->
 													<?php	for ($i = 2; $i < count($type_label); $i++) {?>
 													<tr>
 														<th><?php echo $type_label[$i]; ?></th>
@@ -158,11 +168,11 @@ session_start();
 																echo $publication[$type_column[$i]];
 																break;
 															}?></td>
-													</tr>
+													</tr> <!-- /Collapse-Angaben für restliche Formularfelder -->
 													<?php } ?>
 
 
-												</table>
+												</table> <!-- /Formulartabelle -->
 				  						</div><!--/table-body-->
 										</div>
 		 							</div><!--/panel-->
@@ -182,10 +192,12 @@ session_start();
 			<div class="modal-content">
 				<form enctype="multipart/form-data" action="new_publication.php" method="post">
 
+					<!-- modal-header -->
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Publikation erfassen</h4>
-					</div><!-- modal-header -->
+					</div><!-- /modal-header -->
 
+					<!-- modal-body -->
 					<div class="modal-body">
 						<div class="form-group row">
 							<label for="Type" class="col-sm-4 form-control-label">Publikationstyp</label>
@@ -215,20 +227,23 @@ session_start();
 			<div class="modal-content">
 				<form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
+					<!-- modal-header -->
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">Test</h4>
-					</div><!-- modal-header -->
+					</div><!-- /modal-header  -->
 
+					<!-- modal-body -->
 					<div class="modal-body">
 						<p>
 							Sind Sie sicher, dass Sie die Publikation "<span class="modal-pubtitle"></span>" löschen möchten?
 						</p>
 					</div><!-- /modal-body -->
 
+					<!-- modal-footer-->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
 						<button type="submit" class="btn btn-success btn-sm delete-submit" name="delete-submit" value="">Löschen</button>
-					</div><!-- /modal-footer -->
+					</div><!-- /modal-footer-->
 
 				</form>
 			</div>
