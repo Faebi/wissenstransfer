@@ -33,10 +33,10 @@ session_start();
 
 			if ($result_publication != false) {
 				$success = true;
-				$success_msg = "Ihre Publikation wurde erfolgreich erfasst.";
+				$success_msg = "Ihre Publikation wurde erfolgreich erfasst. ";
 			}else {
 				$error = true;
-				$error_msg = "Bei der Erfassung Ihrer Pulikation ist ein Fehler aufgetreten.";
+				$error_msg = "Bei der Erfassung Ihrer Pulikation ist ein Fehler aufgetreten. ";
 			}
 
 			if ($result_author != false) {

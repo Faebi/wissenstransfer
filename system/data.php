@@ -30,7 +30,7 @@
 	function get_result($sql)
 	{
 		$db = get_db_connection();
-    // echo $sql ."<br>";
+     echo $sql ."<br>";
 		$result = mysqli_query($db, $sql);
 		mysqli_close($db);
 		return $result;
@@ -101,6 +101,36 @@
 		return get_result($sql);
 	}
 
+	function check_media($media){
+		$sql = "SELECT * FROM media WHERE media = $media;";
+		return get_result($sql);
+	}
+
+	function new_media($media){
+		$sql = "INSERT INTO media (media) VALUES ('$media');";
+		return get_result($sql);
+	}
+
+	function get_last_media(){
+		$sql = "SELECT media_id FROM media ORDER BY media_id DESC LIMIT 1;";
+		return get_result($sql);
+	}
+
+	function check_location($location){
+		$sql = "SELECT * FROM location WHERE location = $location;";
+		return get_result($sql);
+	}
+
+	function new_location($location){
+		$sql = "INSERT INTO location (location) VALUES ('$location');";
+		return get_result($sql);
+	}
+
+	function get_last_location(){
+		$sql = "SELECT location_id FROM location ORDER BY location_id DESC LIMIT 1;";
+		return get_result($sql);
+	}
+
 	function add_publication($user_id, $new_publication, $type_column, $type_id){
 		$sql = "INSERT INTO publications (last_edited, type, ";
 
@@ -112,8 +142,25 @@
 		$sql .= ") VALUES ($user_id, $type_id, ";
 
 		for ($i=0; $i < count($new_publication); $i++) {
-			if ($type_column[$i] == 'media' OR $type_column[$i] == 'location') {
-				$sql .= "$new_publication[$i], ";
+			if ($type_column[$i] == 'media'){
+				$media_check = check_media($new_publication[$i]);
+				if($media_check){
+					$sql .= mysqli_fetch_assoc($media_check['media_id']) . ", ";
+				} else {
+					new_media($new_publication[$i]);
+					$new_media_id = mysqli_fetch_assoc(get_last_media())['media_id'];
+					$sql .= $new_media_id . ", ";
+				}
+			} elseif ($type_column[$i] == 'location') {
+				if ($type_column[$i] == 'location'){
+					$location_check = check_location($new_publication[$i]);
+					if($location_check){
+						$sql .= mysqli_fetch_assoc($location_check['location_id']) . ", ";
+					} else {
+						new_location($new_publication[$i]);
+						$new_location_id = mysqli_fetch_assoc(get_last_location())['location_id'];
+						$sql .= $new_location_id . ", ";
+					}
 			} else {
 				$sql .= "'"."$new_publication[$i]"."', ";
 			}
@@ -124,20 +171,19 @@
 
 		return get_result($sql);
 		}
+	}
 
-		function get_last_publication(){
-			$sql = "SELECT publication_id FROM publications ORDER BY publication_id DESC LIMIT 1;";
-			echo $sql;
-			return get_result($sql);
-		}
+	function get_last_publication(){
+		$sql = "SELECT publication_id FROM publications ORDER BY publication_id DESC LIMIT 1;";
+		return get_result($sql);
+	}
 
-		function add_author($author){
-			$ranking = 1;
-			$publication = mysqli_fetch_assoc(get_last_publication())['publication_id'];
-			$sql = "INSERT INTO publishes (user, publication, ranking) VALUES ($author, $publication, $ranking);";
-			echo $sql;
-			return get_result($sql);
-		}
+	function add_author($author){
+		$ranking = 1;
+		$publication = mysqli_fetch_assoc(get_last_publication())['publication_id'];
+		$sql = "INSERT INTO publishes (user, publication, ranking) VALUES ($author, $publication, $ranking);";
+		return get_result($sql);
+	}
 
 
 	/* *********************************************************
