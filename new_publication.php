@@ -21,7 +21,6 @@ session_start();
 
 	$type_label = get_type_label($type_id);
 	$type_column = get_type_column($type_id);
-
 ?>
 
 <!DOCTYPE html>
@@ -90,37 +89,38 @@ session_start();
 							</div>
 							<div class="panel-body">
 								<form enctype="multipart/form-data" action="my_publications.php" method="post">
+									<!-- Title & Subtitle Formular -->
 									<?php for ($i = 0; $i < 2; $i++) {?>
 										<div class="form-group row col-sm-offset-2">
-											<label for="Titel" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
+											<label for="<?php echo $type_label[$i]; ?>" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
 											<div class="col-sm-7">
-												<input type="text" class="form-control form-control-sm" id="Titel" name="<?php echo $type_column[$i]; ?>">
+												<input type="text" class="form-control form-control-sm" id="<?php echo $type_label[$i]; ?>" name="<?php echo $type_column[$i]; ?>">
 											</div>
 										</div>
 								<?php 	} ?>
-
+								<!-- Autorenformular -->
 								<div class="form-group row col-sm-offset-2">
-									<label for="Titel" class="col-sm-1 form-control-label">Autor(en)</label>
+									<label for="author" class="col-sm-1 form-control-label">Autor(en)</label>
 									<div class="col-sm-7">
-										<select class="form-control form-control-sm float_right" id="Type" name="author">
+										<select class="form-control form-control-sm float_right" id="author" name="author">
 										<?php while($user = mysqli_fetch_assoc($user_list)) { ?>
 											<option value="<?php echo $user['user_id']; ?>"><?php echo $user['lastname']." ".$user['firstname']; ?></option>
 										<?php } ?>
 										</select>
 									</div>
 								</div>
-
+								<!-- Restliche Formularfelder -->
 								<?php for ($i = 2; $i < count($type_label); $i++) {?>
 									<div class="form-group row col-sm-offset-2">
-										<label for="Titel" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
+										<label for="<?php echo $type_label[$i]; ?>" class="col-sm-1 form-control-label"><?php echo $type_label[$i]; ?></label>
 										<div class="col-sm-7">
-											<input type="text" class="form-control form-control-sm" id="Titel" name="<?php echo $type_column[$i]; ?>">
+											<input type="<?php if($type_column[$i] === 'date'){echo 'date';}else{echo 'text';} ?>" class="form-control form-control-sm" id="<?php echo $type_label[$i]; ?>" name="<?php echo $type_column[$i]; ?>">
 										</div>
 									</div>
 							<?php 	} ?>
 
 									<button type="submit" class="btn float_right" name="new-submit">Speichern</button>
-								</form>
+								</form> <!-- /Form -->
 		  				</div>
           	</div>
         	</div> <!-- /Publikationen -->
