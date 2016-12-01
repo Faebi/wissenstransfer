@@ -295,4 +295,14 @@
 		return get_result($sql);
 	}
 
+	function get_media_value($media_id){
+		$sql = "SELECT * FROM media WHERE media_id = $media_id;";
+		return get_result($sql);
+	}
+
+	function get_location_value($location_id){
+		$sql = "SELECT * FROM locatin WHERE media_id = $location_id;";
+		return get_result($sql);
+	}
+
 ?>
