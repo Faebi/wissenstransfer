@@ -129,23 +129,28 @@
 	/* new_publication
 	/* ****************************************************** */
 
-	function save_publication($user_id, $new_publication, $type_column){
+	function add_publication($user_id, $new_publication, $type_column, $type_id, $author){
   	$sql_ok = false;
-		$sql = "INSERT INTO publications (last_edited, ";
+		$sql = "INSERT INTO publications (last_edited, type, ";
 
 		for ($i=0; $i < count($type_column); $i++) {
 			$sql .= "$type_column[$i], ";
 		}
-		$sql = substr_replace($sql, ' ', -2, 1);
-		$sql .= ") VALUES ($user_id, ";
 
-		for ($i=0; $i < count($type_); $i++) {
-			$sql .= "$new_publication[$i], ";
+		$sql = substr_replace($sql, ' ', -2, 1);
+		$sql .= ") VALUES ($user_id, $type_id, ";
+
+		for ($i=0; $i < count($new_publication); $i++) {
+			if ($type_column[$i] == 'media' OR $type_column[$i] == 'location') {
+				$sql .= "$new_publication[$i], ";
+			} else {
+				$sql .= "'"."$new_publication[$i]"."', ";
+			}
 		}
 
 		$sql = substr_replace($sql, ' ', -2, 1);
 		$sql .= ") ;";
-
+		echo $sql;
     return get_result($sql);
   	}
 
