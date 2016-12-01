@@ -68,168 +68,22 @@ session_start();
   <div class="container">
     <div class="row">
       <div class="col-md-12"> <!-- Hauptinhalt -->
-
-        <!-- Publikationen -->
         <div class="row">
           <div class="col-xs-12">
-
-
           	<div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">Ausgabe
-					<button type="button" class="btn btn-default btn-sm float_right" aria-label="Left Align">
-					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-					</button>
-				  </h4>
+							<div class="panel-heading">
+				  			<h4 class="panel-title">Ausgabe</h4>
+							</div>
+							<div class="panel-body">
+
+								<!-- Hier käme der Inhalt der ganzen Ausgabe für den Forschungsleiter -->
+
+								<p>Diese Form der Ausgabe funktioniert leider noch nicht. Wir bitten Sie um Entschuldigung.</p>
+
+		  				</div>
+          	</div>
+        	</div>
 				</div>
-				<div class="panel-body">
-
-
-
-          	 <div class="panel-group" id="accordion">
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-					Publikation 1</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse1" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-					Publikation 2</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse2" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-			  <div class="panel panel-default">
-				<div class="panel-heading">
-				  <h4 class="panel-title">
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-					Publikation 3</a>
-					<div class="btn-group float_right">
-					  	<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						</button>
-						<button type="button" class="btn btn-danger btn-sm" aria-label="Left Align">
-						  <span class="glyphicon glyphicon-trash" ></span>
-						</button>
-					</div>
-				  </h4>
-				</div>
-				<div id="collapse3" class="panel-collapse collapse">
-				  <div class="panel-body">
-					  <table class="table-hover publi_table">
-					  	<tr>
-							<th>Vorname:</th>
-							<td>Peter</td>
-						</tr>
-				  		<tr>
-							<th>Nachname:</th>
-							<td>Müller</td>
-						</tr>
-					  </table>
-
-				  </div><!--/table-body-->
-				</div>
-			  </div><!--/panel-->
-
-
-
-  			</div>
-		  </div>
-
-
-          </div>
-        </div> <!-- /Publikationen -->
-		</div>
-
-
-<?php   while($post = mysqli_fetch_assoc($post_list)) { ?>
-        <!-- Beitrag -->
-          <div class="row">
-            <div class="col-xs-2">
-              <div class="thumbnail p42thumbnail">
-                <img src="user_img/<?php echo $post['img_src']; ?>" alt="profilbildBock" class="img-responsive">
-              </div><!-- /thumbnail p42thumbnail -->
-            </div><!-- /col-sm-2 -->
-
-            <form enctype="multipart/form-data" class="form-inline" method="post" action="<?PHP echo $_SERVER['PHP_SELF'] ?>">
-              <div class="col-xs-10">
-                <div class="panel panel-default p42panel">
-                  <div class="panel-heading">
-<?php if($post['owner'] == $user_id){  ?>
-                    <button type="submit" class="close" name="post_delete" value="<?php echo $post['post_id']; ?>">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-<?php } ?>
-                    <h3 class="panel-title"><?php echo $post['firstname'] . " " . $post['lastname']; ?></h3>
-                  </div>
-                  <div class="panel-body">
-                    <p><?php echo $post['text']; ?></p>
-
-<?php if($post['post_img'] != NULL){  ?>
-                    <img src="post_img/<?php echo $post['post_img']; ?>" alt="postimage" class="img-responsive">
-<?php } ?>
-                  </div>
-                  <div class="panel-footer text-right">
-                    <small><a class="text-muted" href="#"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a></small>
-                  </div>
-                </div>
-              </div><!-- /col-sm-10 -->
-            </form>
-          </div> <!-- /Beitrag -->
-<?php   } ?>
-
       </div> <!-- /Hauptinhalt -->
     </div>
   </div>
