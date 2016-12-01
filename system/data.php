@@ -286,6 +286,13 @@
 		}
 	}
 
+	/* *********************************************************
+	/* edit_publication
+	/* ****************************************************** */
 
+	function get_publication($publication_id){
+		$sql = "SELECT * FROM publications WHERE publication_id = $publication_id;";
+		return get_result($sql);
+	}
 
 ?>

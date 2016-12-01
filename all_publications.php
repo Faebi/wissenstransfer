@@ -97,15 +97,16 @@ session_start();
 		 							<div class="panel panel-default">
 		 								<div class="panel-heading">
 			 								<h4 class="panel-title">
+												<form id="form<?php echo $publication['publication_id']?>" action="edit_publication.php" method="post"></form> <!-- Wird benötigt, um mit dem Edit-Button auf edit_publication.php zu verweisen -->
 				 								<a class="publication_title" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $publication['publication_id']?>"><?php echo $publication['title'] ?></a>
-			 									<div class="btn-group float_right">
-					 								<button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-					 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-				 									</button>
-				 									<button type="button" class="btn btn-danger btn-sm pub-delete" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
-					 									<span class="glyphicon glyphicon-trash" ></span>
-				 									</button>
-			 									</div>
+													<div class="btn-group float_right">
+														<button form="form<?php echo $publication['publication_id']?>" type="button submit" class="btn btn-default btn-sm" name="publication_id" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
+						 									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					 									</button>
+					 									<button type="button" class="btn btn-danger btn-sm pub-delete" data-toggle="modal" data-target="#modal-delete" value="<?php echo $publication['publication_id'] ?>" aria-label="Left Align">
+						 									<span class="glyphicon glyphicon-trash" ></span>
+					 									</button>
+				 									</div>
 			 								</h4>
 		 								</div>
 
