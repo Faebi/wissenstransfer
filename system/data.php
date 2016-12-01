@@ -30,7 +30,7 @@
 	function get_result($sql)
 	{
 		$db = get_db_connection();
-     echo $sql ."<br>";
+    // echo $sql ."<br>";
 		$result = mysqli_query($db, $sql);
 		mysqli_close($db);
 		return $result;
@@ -161,16 +161,16 @@
 						$new_location_id = mysqli_fetch_assoc(get_last_location())['location_id'];
 						$sql .= $new_location_id . ", ";
 					}
-			} else {
-				$sql .= "'"."$new_publication[$i]"."', ";
-			}
+				}
+				} else {
+					$sql .= "'$new_publication[$i]', ";
+				}
 		}
 
 		$sql = substr_replace($sql, ' ', -2, 1);
 		$sql .= ") ;";
 
 		return get_result($sql);
-		}
 	}
 
 	function get_last_publication(){
@@ -208,20 +208,19 @@
 						$new_location_id = mysqli_fetch_assoc(get_last_location())['location_id'];
 						$sql .= "location = " . $new_location_id . ", ";
 					}
+				}
 			} else {
 				$sql .= $type_column[$i]. " = '" . $updated_publication[$i] . "', ";
 			}
-		}
+	}
 
 		$sql = substr_replace($sql, ' ', -2, 1);
-		$sql .= " WHERE publication_id = $publication_id;";
+		$sql .= " WHERE publication_id = ". $publication_id . ";";
 
 		return get_result($sql);
-		}
 	}
 
 	function edit_author($author, $publication_id){
-		$ranking = 1;
 		$sql = "UPDATE publishes SET user = $author WHERE publication = $publication_id;";
 		return get_result($sql);
 	}
@@ -408,7 +407,7 @@
 	}
 
 	function get_location_value($location_id){
-		$sql = "SELECT * FROM locatin WHERE media_id = $location_id;";
+		$sql = "SELECT * FROM location WHERE location_id = $location_id;";
 		return get_result($sql);
 	}
 

@@ -108,7 +108,7 @@ session_start();
 								<?php 	} ?>
 								<!-- Autorenformular -->
 								<div class="form-group row col-sm-offset-2">
-									<label for="author" class="col-sm-1 form-control-label">Autor(en)</label>
+									<label for="author" class="col-sm-1 form-control-label">Autor</label>
 									<div class="col-sm-7">
 										<select class="form-control form-control-sm float_right" id="author" name="author">
 										<?php while($user = mysqli_fetch_assoc($user_list)) { ?>

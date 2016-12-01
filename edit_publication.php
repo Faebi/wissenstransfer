@@ -30,7 +30,7 @@ session_start();
 	}else{ $media = ""; }
 
 	if($publication['location']){
-		$location = mysqli_fetch_assoc(get_media_value($publication['location']))['location'];
+		$location = mysqli_fetch_assoc(get_location_value($publication['location']))['location'];
 	}else{ $location = ""; }
 
 	// Liefert alle Infos zu User

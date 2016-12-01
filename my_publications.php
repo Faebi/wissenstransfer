@@ -23,6 +23,7 @@ session_start();
 		delete_publication($_POST['delete-submit']);
 	}
 
+	// Wird aufgerufen, wenn eine neue Publikation erfasst wird
 	if(isset($_POST['new-submit'])){
 		$type_id = $_POST['type-id'];
 		$type_label = get_type_label($type_id);
@@ -56,6 +57,7 @@ session_start();
 			}
 	}
 
+	// Wird aufgerufen, wenn eine Publikation editiert wird
 	if(isset($_POST['edit-submit'])){
 		$type_id = $_POST['type-id'];
 		$publication_id = $_POST['publication-id'];
