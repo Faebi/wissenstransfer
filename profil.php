@@ -6,43 +6,46 @@ session_start();
   	$user_id = $_SESSION['user_id'];
 	}
 
+	// externe Dateien Laden test
+	// data.php beinhaltet alle DB-Anweisungen wie SELECT, INSERT, UPDATE, etc.
+	// Funktionen in data.php liefern das Ergebnis der Anweisungen zurück
+	// security.php enthält sicherheitsrelevante Funktionen
 	require_once("system/data.php");
 	require_once("system/security.php");
 
+	// für Spätere Verwendung initialisieren wir die Variablen $error, $error_msg
 	$error = false;
 	$error_msg = "";
 	$success = false;
 	$success_msg = "";
 
-
+	// Liefert alle Infos zu User
 	$result = get_user($user_id);
 	$user = mysqli_fetch_assoc($result);
 
 	if(isset($_POST['update-submit'])){
+		// Werte aus POST-Array auf SQL-Injections prüfen und in Variablen schreiben
 		$old_password = filter_data($_POST['old-password']);
 		$new_password = filter_data($_POST['new-password']);
 		$confirm_password = filter_data($_POST['confirm-password']);
-
+		// Kontrolle, ob altes Passwort nicht gleich neues Passwort und mit ehemaligem Passwort übereinstimmt
 		if ($old_password == $user['password']) {
 			$result_password = update_password($user_id, $new_password, $confirm_password);
 			if ($result_password != false) {
 				$success = true;
 				$success_msg = "Ihr neues Passwort wurde erfolgreich gespeichert.";
 			}else {
+				// Fehlermeldungen werden erst später angezeigt
 				$error = true;
 				$error_msg = "Ihr Passwort konnte nicht angepasst werden, bitte überprüfen Sie Ihre Angaben.";
 			}
 		} else {
+			// Fehlermeldungen werden erst später angezeigt
 			$error = true;
 			$error_msg = "Die Eingabe des alten Passwortes stimmt nicht mit Ihrem bestehenden Passwort überein.";
 		}
 	}
-
-
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="de">
@@ -132,11 +135,13 @@ session_start();
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
+					<!-- Formular -->
 		      <form enctype="multipart/form-data" action="<?PHP echo $_SERVER['PHP_SELF'] ?>" method="post">
 		        <div class="modal-header">
 		          <h4 class="modal-title" id="myModalLabel">Passwort ändern</h4>
 		        </div>
-		        <div class="modal-body">
+						<!-- Modal Body -->
+						<div class="modal-body">
 		          <div class="form-group row">
 		            <label for="Passwort" class="col-sm-4 form-control-label">Altes Passwort</label>
 		            <div class="col-sm-8">
@@ -156,12 +161,12 @@ session_start();
 		            </div>
 		          </div>
 
-		        </div>
+		        </div> <!-- Modal Body close-->
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Abbrechen</button>
 		          <button type="submit" class="btn btn-success btn-sm" name="update-submit">Änderungen speichern</button>
 		        </div>
-		      </form>
+		      </form><!-- Formular close -->
 
 		    </div>
 		  </div>
